@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">GameBook</string>
+    <string name="giochi">Giochi</string>
+    <string name="nuovi_arrivi">Nuovi arrivi</string>
+    <string name="offerte">Offerte</string>
+    <string name="esplora">Esplora</string>
+    <string name="amici">Amici</string>
+    <string name="profilo">Profilo</string>
 </resources>
