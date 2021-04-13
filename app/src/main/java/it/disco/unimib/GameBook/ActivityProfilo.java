@@ -7,25 +7,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class ActivityProfilo extends AppCompatActivity {
     private Button button;
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_profilo);
 
-        button = findViewById(R.id.Profilo);
+        button = findViewById(R.id.Esplora);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openActivity_profilo();
+                openMainActivity();
             }
         });
-
     }
-
-    public void openActivity_profilo() {
-        Intent intent = new Intent(MainActivity.this, ActivityProfilo.class);
+    public void openMainActivity() {
+        Intent intent = new Intent(ActivityProfilo.this, MainActivity.class);
         startActivity(intent);
     }
 }
