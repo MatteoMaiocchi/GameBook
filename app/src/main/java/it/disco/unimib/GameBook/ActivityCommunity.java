@@ -1,22 +1,22 @@
 package it.disco.unimib.GameBook;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class ActivityCommunity extends AppCompatActivity {
     private Button buttonP;
-    private Button buttonC;
-    @Override
+    private Button buttonE;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_community);
 
         buttonP = findViewById(R.id.Profilo);
-        buttonC = findViewById(R.id.Community);
+        buttonE = findViewById(R.id.Esplora);
 
         buttonP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -24,22 +24,21 @@ public class MainActivity extends AppCompatActivity {
                 openActivity_profilo();
             }
         });
-
-        buttonC.setOnClickListener(new View.OnClickListener() {
+        buttonE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openActivity_community();
+                openMainActivity();
             }
         });
-
     }
 
     public void openActivity_profilo() {
-        Intent intent = new Intent(MainActivity.this, ActivityProfilo.class);
+        Intent intent = new Intent(ActivityCommunity.this, ActivityProfilo.class);
         startActivity(intent);
     }
-    public void openActivity_community() {
-        Intent intent = new Intent(MainActivity.this, ActivityCommunity.class);
+
+    public void openMainActivity() {
+        Intent intent = new Intent(ActivityCommunity.this, MainActivity.class);
         startActivity(intent);
     }
 }

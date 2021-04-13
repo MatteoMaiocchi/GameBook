@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ActivityProfilo" />
+        <activity android:name=".ActivityCommunity"/>
     </application>
 
 </manifest>
