@@ -12,53 +12,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <LinearLayout
-                android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="0dp"
                 android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                android:orientation="horizontal">
 
 
-                <Button
+                <ImageButton
                     android:id="@+id/Esplora"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/esplora"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:backgroundTint="@color/white" />
+                    android:src="@drawable/ic_baseline_videogame_asset_24" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/Community"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/community"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:backgroundTint="@color/white" />
+                    android:src="@drawable/ic_baseline_group_24" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/Profilo"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/profilo"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:backgroundTint="@color/white" />
-            </LinearLayout>
+                    android:src="@drawable/ic_baseline_person_24" />
 
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -110,8 +94,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/imageView2"
