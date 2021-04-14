@@ -22,18 +22,18 @@
 
 
                 <ImageButton
-                    android:id="@+id/Esplora"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_baseline_videogame_asset_24" />
-
-                <ImageButton
                     android:id="@+id/Community"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:src="@drawable/ic_baseline_group_24" />
+
+                <ImageButton
+                    android:id="@+id/Esplora"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_baseline_videogame_asset_24" />
 
                 <ImageButton
                     android:id="@+id/Profilo"
@@ -47,7 +47,7 @@
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="250dp"
                 android:gravity="center"
                 android:orientation="horizontal"
@@ -56,25 +56,19 @@
                 app:layout_constraintTop_toTopOf="parent">
 
 
-                <Button
-                    android:id="@+id/giochi"
+                <ImageButton
+                    android:id="@+id/imageButton"
                     android:layout_width="0dp"
-                    android:layout_height="75dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/giochi"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:backgroundTint="@color/white" />
+                    android:src="@drawable/ic_baseline_grid_on_24" />
 
-                <Button
-                    android:id="@+id/preferiti"
+                <ImageButton
+                    android:id="@+id/imageButton2"
                     android:layout_width="0dp"
-                    android:layout_height="75dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/preferiti"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:backgroundTint="@color/white" />
+                    android:src="@drawable/ic_baseline_favorite_border_24" />
 
             </LinearLayout>
 
