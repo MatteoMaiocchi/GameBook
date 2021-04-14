@@ -6,26 +6,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
-    private Button buttonP;
-    private Button buttonC;
+    private ImageButton ibuttonP;
+    private ImageButton ibuttonC;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttonP = findViewById(R.id.Profilo);
-        buttonC = findViewById(R.id.Community);
+        ibuttonP = findViewById(R.id.Profilo);
+        ibuttonC = findViewById(R.id.Community);
 
-        buttonP.setOnClickListener(new View.OnClickListener() {
+        ibuttonP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openActivity_profilo();
             }
         });
 
-        buttonC.setOnClickListener(new View.OnClickListener() {
+        ibuttonC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openActivity_community();

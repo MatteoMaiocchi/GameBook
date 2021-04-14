@@ -4,27 +4,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ActivityCommunity extends AppCompatActivity {
-    private Button buttonP;
-    private Button buttonE;
+    private ImageButton ibuttonP;
+    private ImageButton ibuttonE;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_community);
 
-        buttonP = findViewById(R.id.Profilo);
-        buttonE = findViewById(R.id.Esplora);
+        ibuttonP = findViewById(R.id.Profilo);
+        ibuttonE = findViewById(R.id.Esplora);
 
-        buttonP.setOnClickListener(new View.OnClickListener() {
+        ibuttonP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openActivity_profilo();
             }
         });
-        buttonE.setOnClickListener(new View.OnClickListener() {
+        ibuttonE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openMainActivity();
