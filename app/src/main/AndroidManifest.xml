@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="it.disco.unimib.GameBook">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,14 +13,17 @@
         android:theme="@style/Theme.GameBook">
         <activity android:name=".MainActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ActivityProfilo" android:screenOrientation="portrait"/>
         <activity android:name=".ActivityCommunity" android:screenOrientation="portrait"/>
+        <activity android:name=".ActivityLogin" android:screenOrientation="portrait">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>/>
+        </activity>
     </application>
 
 </manifest>
