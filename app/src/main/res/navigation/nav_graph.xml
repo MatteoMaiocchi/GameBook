@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/EsploraFragment">
+
+    <fragment
+        android:id="@+id/CommunityFragment"
+        android:name="it.disco.unimib.GameBook.CommunityFragment"
+        android:label="fragment_community"
+        tools:layout="@layout/fragment_community" />
+    <fragment
+        android:id="@+id/EsploraFragment"
+        android:name="it.disco.unimib.GameBook.EsploraFragment"
+        android:label="fragment_esplora"
+        tools:layout="@layout/fragment_esplora" />
+    <fragment
+        android:id="@+id/ProfiloFragment"
+        android:name="it.disco.unimib.GameBook.ProfiloFragment"
+        android:label="fragment_profilo"
+        tools:layout="@layout/fragment_profilo" />
+</navigation>

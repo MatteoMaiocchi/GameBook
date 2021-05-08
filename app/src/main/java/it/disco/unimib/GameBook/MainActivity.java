@@ -1,6 +1,10 @@
 package it.disco.unimib.GameBook;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -13,40 +17,27 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
+import it.disco.unimib.GameBook.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity {
-    private ImageButton ibuttonP;
-    private ImageButton ibuttonC;
+    ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_login);
+        //setContentView(R.layout.activity_main_login);
 
-
-        ibuttonP = findViewById(R.id.Profilo);
-        ibuttonC = findViewById(R.id.Community);
-
-        ibuttonP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openActivity_profilo();
-            }
-        });
-
-        ibuttonC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openActivity_community();
-            }
-        });
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.EsploraFragment, R.id.ProfiloFragment, R.id.CommunityFragment)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.bottomNav, navController);
 
     }
 
-    public void openActivity_profilo() {
-        Intent intent = new Intent(MainActivity.this, ActivityProfilo.class);
-        startActivity(intent);
-    }
-    public void openActivity_community() {
-        Intent intent = new Intent(MainActivity.this, ActivityCommunity.class);
-        startActivity(intent);
-    }
+
+
+
 }
