@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "486132784658",
+    "project_id": "gamebook-312408",
+    "storage_bucket": "gamebook-312408.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486132784658:android:6d93855bd5dcb3e190c2cb",
+        "android_client_info": {
+          "package_name": "it.disco.unimib.GameBook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486132784658-3a06h1ti0g7aadogfrmgvd4gq50vu862.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "it.disco.unimib.GameBook",
+            "certificate_hash": "19c81402dcadc77af89a0c412f89eeb77f5e7e6c"
+          }
+        },
+        {
+          "client_id": "486132784658-3dvtp5pfaujuorhuud9vdcgrricbs06g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAt2DstqzwfAUVpUEy9B0mMCrfA3DqrEgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486132784658-3dvtp5pfaujuorhuud9vdcgrricbs06g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
