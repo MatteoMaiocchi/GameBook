@@ -12,6 +12,7 @@ public class VideoGame {
     protected double prezzo_videogame;
 
 
+
     public int getId_videogame() {
         return id_videogame;
     }
