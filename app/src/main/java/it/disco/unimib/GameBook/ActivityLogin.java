@@ -110,7 +110,8 @@ public class ActivityLogin extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+            //GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+            firebaseAuthWithGoogleAccount(account);
             /*
             if (acct != null) {
                 String personName = acct.getDisplayName();
