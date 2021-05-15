@@ -19,5 +19,14 @@
         android:id="@+id/ProfiloFragment"
         android:name="it.disco.unimib.GameBook.ProfiloFragment"
         android:label="fragment_profilo"
-        tools:layout="@layout/fragment_profilo" />
+        tools:layout="@layout/fragment_profilo" >
+        <action
+            android:id="@+id/action_ProfiloFragment_to_activityLogin"
+            app:destination="@id/activityLogin" />
+    </fragment>
+    <activity
+        android:id="@+id/activityLogin"
+        android:name="it.disco.unimib.GameBook.ActivityLogin"
+        android:label="activity_main_login"
+        tools:layout="@layout/activity_main_login" />
 </navigation>

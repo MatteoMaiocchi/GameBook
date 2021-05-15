@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,15 +14,30 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class ProfiloFragment extends Fragment {
 
-
+    FirebaseAuth firebaseAuth;
+    GoogleSignInClient mGoogleSignInClient;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
+
+        View root = inflater.inflate(R.layout.fragment_profilo, container, false);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+
+        firebaseAuth = FirebaseAuth.getInstance();
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profilo, container, false);
+        return root;
     }
 
     @Override
@@ -31,17 +48,17 @@ public class ProfiloFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        /*
-        if (id == R.id.sub_item1)
+        if (id == R.id.log_out)
         {
 
+            firebaseAuth.signOut();
+            NavController navController = NavHostFragment.findNavController(this);
+            navController.navigate(
+                    R.id.action_ProfiloFragment_to_activityLogin);
 
-
-        }else if (id == R.id.action_done){
-
+            mGoogleSignInClient.signOut();
+            return true;
         }
-
-         */
         return super.onOptionsItemSelected(item);
     }
 }
