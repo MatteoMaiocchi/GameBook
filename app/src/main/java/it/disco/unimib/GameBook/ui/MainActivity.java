@@ -1,4 +1,4 @@
-package it.disco.unimib.GameBook;
+package it.disco.unimib.GameBook.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -17,6 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
+import it.disco.unimib.GameBook.R;
 import it.disco.unimib.GameBook.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {

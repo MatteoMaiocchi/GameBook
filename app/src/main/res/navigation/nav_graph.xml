@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/CommunityFragment"
-        android:name="it.disco.unimib.GameBook.CommunityFragment"
+        android:name="it.disco.unimib.GameBook.ui.community.CommunityFragment"
         android:label="fragment_community"
         tools:layout="@layout/fragment_community" />
     <fragment
         android:id="@+id/EsploraFragment"
-        android:name="it.disco.unimib.GameBook.EsploraFragment"
+        android:name="it.disco.unimib.GameBook.ui.esplora.EsploraFragment"
         android:label="fragment_esplora"
         tools:layout="@layout/fragment_esplora" />
     <fragment
         android:id="@+id/ProfiloFragment"
-        android:name="it.disco.unimib.GameBook.ProfiloFragment"
+        android:name="it.disco.unimib.GameBook.ui.profilo.ProfiloFragment"
         android:label="fragment_profilo"
         tools:layout="@layout/fragment_profilo" >
         <action
@@ -26,7 +26,7 @@
     </fragment>
     <activity
         android:id="@+id/activityLogin"
-        android:name="it.disco.unimib.GameBook.ActivityLogin"
+        android:name="it.disco.unimib.GameBook.ui.ActivityLogin"
         android:label="activity_main_login"
         tools:layout="@layout/activity_main_login" />
 </navigation>

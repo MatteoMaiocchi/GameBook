@@ -1,4 +1,4 @@
-package it.disco.unimib.GameBook;
+package it.disco.unimib.GameBook.ui.profilo;
 
 import android.os.Bundle;
 
@@ -13,11 +13,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+
+import it.disco.unimib.GameBook.R;
 
 public class ProfiloFragment extends Fragment {
 
@@ -36,6 +39,7 @@ public class ProfiloFragment extends Fragment {
         mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        
         // Inflate the layout for this fragment
         return root;
     }

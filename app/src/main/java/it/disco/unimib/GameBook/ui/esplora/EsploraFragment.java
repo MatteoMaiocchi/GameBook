@@ -1,4 +1,4 @@
-package it.disco.unimib.GameBook;
+package it.disco.unimib.GameBook.ui.esplora;
 
 import android.os.Bundle;
 
@@ -8,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import it.disco.unimib.GameBook.R;
 
-public class CommunityFragment extends Fragment {
+
+public class EsploraFragment extends Fragment {
 
 
 
@@ -17,6 +19,6 @@ public class CommunityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_community, container, false);
+        return inflater.inflate(R.layout.fragment_esplora, container, false);
     }
 }

@@ -5,12 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityLogin">
+    tools:context=".ui.ActivityLogin">
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
-        android:layout_width="152dp"
-        android:layout_height="104dp"
+        android:layout_width="236dp"
+        android:layout_height="77dp"
         android:layout_centerInParent="true" />
 
 </RelativeLayout>

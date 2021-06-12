@@ -1,4 +1,4 @@
-package it.disco.unimib.GameBook;
+package it.disco.unimib.GameBook.ui;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -16,7 +16,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 //import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 //import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,7 +26,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import it.disco.unimib.GameBook.R;
 import it.disco.unimib.GameBook.databinding.ActivityMainLoginBinding;
 
 public class ActivityLogin extends AppCompatActivity {
@@ -35,7 +41,9 @@ public class ActivityLogin extends AppCompatActivity {
     //SignInButton sign_in_button;
     private static final int RC_SIGN_IN = 123;
     private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore db;
     private static final String TAG = "GOOGLE_SIGN_IN_TAG";
+   
 
     GoogleSignInClient mGoogleSignInClient;
 
@@ -54,6 +62,8 @@ public class ActivityLogin extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        
 
         //sign_in_button = findViewById(R.id.sign_in_button);
         //sign_in_button.setSize(SignInButton.SIZE_STANDARD);
@@ -69,6 +79,7 @@ public class ActivityLogin extends AppCompatActivity {
                 }
 
                  */
+
                 Log.d(TAG, "onClick : begin Google SignIn");
                 Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -152,17 +163,32 @@ public class ActivityLogin extends AppCompatActivity {
                         //get user info
                         String uid = firebaseUser.getUid();
                         String email = firebaseUser.getEmail();
+                        Uri foto = firebaseUser.getPhotoUrl();
                         //check id user is new or exsisting
                         if(authResult.getAdditionalUserInfo().isNewUser()){
                             Log.d(TAG, "onSuccess: Account created" +email);
                             Toast.makeText(ActivityLogin.this, "Account created"+email, Toast.LENGTH_SHORT).show();
+
                         }
                         else{
                             Log.d(TAG, "onSuccess: Existing User" + email);
                             Toast.makeText(ActivityLogin.this, "onSuccess: Existing User"+email, Toast.LENGTH_SHORT).show();
                         }
 
+
+                        Log.d("UID", "id: " + firebaseAuth.getUid());
+
+                        // Create a new user
+                        //CollectionReference documentReference = db.collection("users").document(firebaseAuth.getCurrentUser().getUid()).collection("game");
+                        DocumentReference documentReference = db.collection("users").document(firebaseAuth.getCurrentUser().getUid());
+                        Map<String, Object> user = new HashMap<>();
+                        user.put("email", firebaseAuth.getCurrentUser().getEmail());
+                        user.put("foto", firebaseAuth.getCurrentUser().getPhotoUrl().toString());
+                        documentReference.set(user);
+
+
                         //start profile activity
+
                         startActivity(new Intent(ActivityLogin.this, MainActivity.class));
                         finish();
                     }
@@ -170,10 +196,6 @@ public class ActivityLogin extends AppCompatActivity {
 
 
                 })
-
-
-
-
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {

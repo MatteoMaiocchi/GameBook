@@ -11,18 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GameBook">
-        <activity android:name=".SignOut"></activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityProfilo"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ActivityCommunity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ActivityLogin"
+            android:name=".ui.ActivityLogin"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
