@@ -12,27 +12,28 @@ import java.util.List;
  */
 public class Response implements Parcelable {
 
-    //private String status;
-    //private int results;
+    private int count;
+
     @SerializedName(value = "results")
     private List<VideoGame> videoGameList;
 
-    public Response(String status, int results, List<VideoGame> videoGameList) {
-        //this.status = status;
-        //this.results = results;
+    public Response(int count, List<VideoGame> videoGameList) {
+        this.count = count;
         this.videoGameList = videoGameList;
     }
 
     protected Response(Parcel in) {
+        this.count = in.readInt();
         this.videoGameList = in.createTypedArrayList(VideoGame.CREATOR);
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.count);
         dest.writeTypedList(this.videoGameList);
     }
     public void readFromParcel(Parcel source) {
-
+        this.count = source.readInt();
         this.videoGameList = source.createTypedArrayList(VideoGame.CREATOR);
     }
 
@@ -69,4 +70,14 @@ public class Response implements Parcelable {
     public int describeContents() {
         return 0;
     }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 }
+
+

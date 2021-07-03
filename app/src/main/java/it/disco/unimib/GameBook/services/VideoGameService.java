@@ -7,6 +7,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Query;
 
 public interface VideoGameService {
-    @GET("top-headlines")
-    Call<Response> getTopHeadlines(@Header("Authorization") String apiKey);
+    @GET("games")
+    Call<Response> getGames(@Header("Authorization") String apiKey,
+                            @Query("search") String game);
 }

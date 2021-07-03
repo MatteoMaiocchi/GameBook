@@ -9,12 +9,15 @@ import java.util.Date;
 public class VideoGame implements Parcelable {
     protected int id_videogame;
     protected String nome_videogame;
-    protected Image copertina_videogame;
+    protected String copertina_videogame;
     protected Date data_uscita_videogame;
     protected double prezzo_videogame;
     protected String released;
+    protected int rating;
 
+    public int getRating() { return rating; }
 
+    public void setRating(int rating) { this.rating = rating; }
 
     public int getId_videogame() {
         return id_videogame;
@@ -32,11 +35,11 @@ public class VideoGame implements Parcelable {
         this.nome_videogame = nome_videogame;
     }
 
-    public Image getCopertina_videogame() {
+    public String getCopertina_videogame() {
         return copertina_videogame;
     }
 
-    public void setCopertina_videogame(Image copertina_videogame) {
+    public void setCopertina_videogame(String copertina_videogame) {
         this.copertina_videogame = copertina_videogame;
     }
 
@@ -62,7 +65,8 @@ public class VideoGame implements Parcelable {
                 "id=" + id_videogame +
                 ", nome='" + nome_videogame + '\'' +
                 ", released='" + released + '\'' +
-
+                ", immagineCopertina='" + copertina_videogame + '\'' +
+                ", rating='" + rating + '\'' +
                 '}';
     }
 
@@ -76,6 +80,8 @@ public class VideoGame implements Parcelable {
         dest.writeInt(this.id_videogame);
         dest.writeString(this.nome_videogame);
         dest.writeString(this.released);
+        dest.writeString(this.copertina_videogame);
+        dest.writeInt(this.rating);
 
     }
 
@@ -84,6 +90,8 @@ public class VideoGame implements Parcelable {
         this.id_videogame = source.readInt();
         this.nome_videogame = source.readString();
         this.released = source.readString();
+        this.copertina_videogame = source.readString();
+        this.rating= source.readInt();
 
     }
 
@@ -92,6 +100,8 @@ public class VideoGame implements Parcelable {
         this.id_videogame = in.readInt();
         this.nome_videogame = in.readString();
         this.released = in.readString();
+        this.copertina_videogame = in.readString();
+        this.rating = in.readInt();
 
     }
 

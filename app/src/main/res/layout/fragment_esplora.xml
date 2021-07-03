@@ -57,41 +57,10 @@
                     android:layout_marginTop="16dp"
                     android:orientation="horizontal">
 
-
-                    <ImageButton
-                        android:id="@+id/imageButton1"
-                        android:layout_width="100dp"
-                        android:layout_height="94dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton2"
-                        android:layout_width="100dp"
-                        android:layout_height="94dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton3"
-                        android:layout_width="100dp"
-                        android:layout_height="94dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton4"
-                        android:layout_width="100dp"
-                        android:layout_height="94dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton5"
-                        android:layout_width="100dp"
-                        android:layout_height="94dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_menu_gallery" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="277dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal" />
 
                 </LinearLayout>
             </HorizontalScrollView>
@@ -134,40 +103,7 @@
                     android:orientation="horizontal">
 
 
-                    <ImageButton
-                        android:id="@+id/imageButton7"
-                        android:layout_width="100dp"
-                        android:layout_height="94dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_menu_gallery" />
 
-                    <ImageButton
-                        android:id="@+id/imageButton8"
-                        android:layout_width="100dp"
-                        android:layout_height="94dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton9"
-                        android:layout_width="100dp"
-                        android:layout_height="94dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton10"
-                        android:layout_width="100dp"
-                        android:layout_height="94dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton11"
-                        android:layout_width="100dp"
-                        android:layout_height="94dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_menu_gallery" />
 
                 </LinearLayout>
             </HorizontalScrollView>
@@ -208,41 +144,6 @@
                     android:layout_marginTop="16dp"
                     android:orientation="horizontal">
 
-
-                    <ImageButton
-                        android:id="@+id/imageButton12"
-                        android:layout_width="100dp"
-                        android:layout_height="94dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton13"
-                        android:layout_width="100dp"
-                        android:layout_height="94dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton14"
-                        android:layout_width="100dp"
-                        android:layout_height="94dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton15"
-                        android:layout_width="100dp"
-                        android:layout_height="94dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton16"
-                        android:layout_width="100dp"
-                        android:layout_height="94dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_menu_gallery" />
 
                 </LinearLayout>
             </HorizontalScrollView>
