@@ -31,8 +31,8 @@ public class VideogameRepositoryWithLiveData implements IVideogameRepositoryWith
     }
 
     @Override
-    public MutableLiveData<Response> fetchVideogames(String game) {
-        Call<Response> call = videoGameService.getGames(game, Constants.VIDEOGAME_API_KEY);
+    public MutableLiveData<Response> fetchVideogames( int page) {
+        Call<Response> call = videoGameService.getGames( page, Constants.VIDEOGAME_API_KEY);
 
         call.enqueue(new Callback<Response>() {
             @Override

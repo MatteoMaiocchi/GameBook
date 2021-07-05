@@ -8,5 +8,5 @@ import androidx.lifecycle.MutableLiveData;
 
 
 public interface IVideogameRepositoryWithLiveData {
-    MutableLiveData<Response> fetchVideogames(String game);
+    MutableLiveData<Response> fetchVideogames( int page);
 }

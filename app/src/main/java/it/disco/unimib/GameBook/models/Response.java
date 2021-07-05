@@ -1,27 +1,46 @@
 package it.disco.unimib.GameBook.models;
 
+import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
-
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * It represents an answer from given by NewsApi.org Webservice.
- */
 public class Response implements Parcelable {
 
-    private int count;
-
+    @SerializedName(value = "count")
+    @Expose
+    private Integer count;
     @SerializedName(value = "results")
-    private List<VideoGame> videoGameList;
+    @Expose
+    private List<VideoGame> videoGameList = null;
 
-    public Response(int count, List<VideoGame> videoGameList) {
+    public Response(Integer count, List<VideoGame> videoGameList) {
         this.count = count;
         this.videoGameList = videoGameList;
     }
 
+
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public List<VideoGame> getVideoGameList() {
+        return videoGameList;
+    }
+
+    public void setVideoGameList(List<VideoGame> videoGameList) {
+        this.videoGameList = videoGameList;
+    }
+
+    //Parcelable
     protected Response(Parcel in) {
         this.count = in.readInt();
         this.videoGameList = in.createTypedArrayList(VideoGame.CREATOR);
@@ -50,14 +69,6 @@ public class Response implements Parcelable {
     };
 
 
-    public List<VideoGame> getVideoGameList() {
-        return videoGameList;
-    }
-
-    public void setVideoGameList(List<VideoGame> videoGameList) {
-        this.videoGameList = videoGameList;
-    }
-
     @Override
     public String toString() {
         return "Response{" +
@@ -71,13 +82,9 @@ public class Response implements Parcelable {
         return 0;
     }
 
-    public int getCount() {
-        return count;
-    }
 
-    public void setCount(int count) {
-        this.count = count;
-    }
+
+
 }
 
 

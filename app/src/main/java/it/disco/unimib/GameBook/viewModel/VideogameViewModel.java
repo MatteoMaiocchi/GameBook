@@ -19,6 +19,7 @@ public class VideogameViewModel extends AndroidViewModel {
     private MutableLiveData<Response> mResponseLiveData;
     private IVideogameRepositoryWithLiveData mIVideogameRepositoryWithLiveData;
     private String game;
+    private int page;
     private int count;
 
 
@@ -43,7 +44,7 @@ public class VideogameViewModel extends AndroidViewModel {
     }
 
     private void loadVideogames() {
-        mResponseLiveData = mIVideogameRepositoryWithLiveData.fetchVideogames(game);
+        mResponseLiveData = mIVideogameRepositoryWithLiveData.fetchVideogames( page);
     }
 
     public MutableLiveData<Response> getVideogameLiveData() {

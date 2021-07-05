@@ -58,9 +58,10 @@
                     android:orientation="horizontal">
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/prova"
                         android:layout_width="277dp"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal" />
+                        android:orientation="vertical" />
 
                 </LinearLayout>
             </HorizontalScrollView>

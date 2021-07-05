@@ -4,16 +4,20 @@ import android.media.Image;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class VideoGame implements Parcelable {
-    protected int id_videogame;
-    protected String nome_videogame;
-    protected String copertina_videogame;
-    protected Date data_uscita_videogame;
-    protected double prezzo_videogame;
-    protected String released;
-    protected int rating;
+    /*
+    private int id;
+    private String nome_videogame;
+    private String copertina_videogame;
+    private Date data_uscita_videogame;
+    private double prezzo_videogame;
+    private String released;
+    private int rating;
 
     public int getRating() { return rating; }
 
@@ -116,6 +120,114 @@ public class VideoGame implements Parcelable {
             return new VideoGame[size];
         }
     };
+
+     */
+    @SerializedName(value = "id")
+    @Expose
+    private Integer id;
+    @SerializedName(value = "name")
+    @Expose
+    private String name;
+    @SerializedName(value = "background_image")
+    @Expose
+    private String background_image;
+    @SerializedName(value = "rating")
+    @Expose
+    private Integer rating;
+
+    public VideoGame(Integer id, String name, String background_image, Integer rating) {
+        this.id = id;
+        this.name = name;
+        this.background_image = background_image;
+        this.rating = rating;
+    }
+
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBackground_image() {
+        return background_image;
+    }
+
+    public void setBackground_image(String background_image) {
+        this.background_image = background_image;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    @Override
+    public String toString() {
+        return "VideoGame{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", background_image='" + background_image + '\'' +
+                ", rating=" + rating +
+                '}';
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.background_image);
+        dest.writeInt(this.rating);
+
+    }
+    public void readFromParcel(Parcel source){
+        this.id = source.readInt();
+        this.name = source.readString();
+        this.background_image = source.readString();
+        this.rating = source.readInt();
+    }
+
+    protected VideoGame(Parcel in){
+
+        this.id = in.readInt();
+        this.name = in.readString();
+        this.background_image = in.readString();
+        this.rating = in.readInt();
+    }
+
+    public static final Parcelable.Creator<VideoGame> CREATOR = new Parcelable.Creator<VideoGame>(){
+
+        @Override
+        public VideoGame createFromParcel(Parcel source) {
+            return new VideoGame(source);
+        }
+
+        @Override
+        public VideoGame[] newArray(int size) {
+            return new VideoGame[size];
+        }
+    };
+
 }
 
 

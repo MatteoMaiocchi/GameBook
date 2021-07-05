@@ -43,11 +43,12 @@ public class EsploraFragment extends Fragment implements ResponseCallback {
 
         View root = inflater.inflate(R.layout.fragment_esplora, container, false);
 
-        setHasOptionsMenu(true);
+        //setHasOptionsMenu(true);
 
         this.page = 1;
 
         videogameRepository = new VideoGameResponseCallback(this, requireActivity().getApplication());
+
 
         return root;
     }
@@ -58,19 +59,27 @@ public class EsploraFragment extends Fragment implements ResponseCallback {
 
         videoGamesApi = new ArrayList<>();
 
-        RecyclerView recyclerView = view.findViewById(R.id.nuoviArrivi);
+        RecyclerView recyclerView = view.findViewById(R.id.prova);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(nuoviArriviViewAdapter);
-        videogameRepository.fetchVideoGame("Fifa"); //Stringa di ricerca
+        Log.d("pirla", "pirla");
+        videogameRepository.fetchVideoGame( page); //Stringa di ricerca
     }
 
 
     @Override
     public void onResponse(List<VideoGame> videoGameList) {
+        Log.d("giochi", "ciao");
         videoGamesApi.addAll(videoGameList);
-        nuoviArriviViewAdapter.notifyDataSetChanged(); //Restituisce la notifica dei dati caricati
-        Log.d("giochi", videoGameList.toString());
+        Log.d("prova", videoGamesApi.toString());
+        requireActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                nuoviArriviViewAdapter.notifyDataSetChanged();
+
+            }
+        });
     }
 
     @Override

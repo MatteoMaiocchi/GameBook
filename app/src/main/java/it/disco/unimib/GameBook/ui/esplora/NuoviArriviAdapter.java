@@ -47,17 +47,19 @@ public class NuoviArriviAdapter extends RecyclerView.Adapter<NuoviArriviAdapter.
 
     public class NuoviArriviHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
+        TextView textView;
 
         public NuoviArriviHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageViewNuoviArrivi);
+            textView = itemView.findViewById(R.id.titolo);
         }
 
         public void bind(VideoGame videoGame) {
 
             if (videoGame != null) {
 
-                String url = videoGame.getCopertina_videogame();
+                String url = videoGame.getBackground_image();
                 String newUrl = null;
 
                 if (url != null) {
@@ -68,6 +70,8 @@ public class NuoviArriviAdapter extends RecyclerView.Adapter<NuoviArriviAdapter.
                     Glide.with(itemView.getContext()).load(newUrl).
                             placeholder(R.drawable.ic_baseline_cloud_download_24).into(imageView);
                 }
+                textView.setText(videoGame.getName());
+
 
                 /*itemView.setOnClickListener(new View.OnClickListener() {
                     @Override public void onClick(View v) {

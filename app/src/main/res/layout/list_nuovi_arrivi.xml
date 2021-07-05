@@ -22,6 +22,17 @@
 
         </androidx.appcompat.widget.AppCompatImageView>
 
+        <TextView
+            android:id="@+id/titolo"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Nome">
+
+        </TextView>
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
