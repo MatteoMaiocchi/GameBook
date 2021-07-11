@@ -263,7 +263,7 @@ public class CommunityFragment extends Fragment {
      */
 
 
-    public void search(String text){
+    /*public void search(String text){
         String searchText = text.toLowerCase();
         firebaseFirestore.collection("users").orderBy("email").startAt(searchText).endAt(searchText + "\uf8ff")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -281,5 +281,5 @@ public class CommunityFragment extends Fragment {
 
                     }
                 });
-    }
+    }*/
 }

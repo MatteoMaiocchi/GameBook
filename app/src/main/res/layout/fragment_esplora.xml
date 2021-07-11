@@ -9,11 +9,11 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <SearchView
+        <!--<SearchView
             android:layout_width="390dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="30dp" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,26 +30,21 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="120dp"
+                    android:layout_marginTop="0dp"
                     android:background="@color/white"
                     android:text="@string/giochi"
                     android:textColor="@color/black"
                     android:textSize="30sp" />
 
-                <Button
+                <!--<Button
                     android:id="@+id/veditutti1"
                     android:layout_width="171dp"
                     android:layout_height="35dp"
-                    android:layout_marginTop="120dp"
+                    android:layout_marginTop="0dp"
                     android:layout_marginRight="16dp"
-                    android:text="vedi tutti" />
+                    android:text="vedi tutti" />-->
 
             </LinearLayout>
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -61,10 +56,8 @@
                         android:id="@+id/prova"
                         android:layout_width="277dp"
                         android:layout_height="match_parent"
-                        android:orientation="vertical" />
-
+                        android:orientation="horizontal" />
                 </LinearLayout>
-            </HorizontalScrollView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -83,12 +76,12 @@
                     android:textColor="@color/black"
                     android:textSize="30sp" />
 
-                <Button
+                <!--<Button
                     android:id="@+id/veditutti2"
                     android:layout_width="171dp"
                     android:layout_height="35dp"
                     android:layout_marginRight="16dp"
-                    android:text="vedi tutti" />
+                    android:text="vedi tutti" />-->
 
             </LinearLayout>
 
@@ -109,7 +102,7 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -147,7 +140,7 @@
 
 
                 </LinearLayout>
-            </HorizontalScrollView>
+            </HorizontalScrollView>-->
         </LinearLayout>
 
 

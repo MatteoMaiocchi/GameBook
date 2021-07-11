@@ -14,7 +14,11 @@
         android:id="@+id/EsploraFragment"
         android:name="it.disco.unimib.GameBook.ui.esplora.EsploraFragment"
         android:label="fragment_esplora"
-        tools:layout="@layout/fragment_esplora" />
+        tools:layout="@layout/fragment_esplora" >
+        <action
+            android:id="@+id/action_EsploraFragment_to_videoGameFragment"
+            app:destination="@id/videoGameFragment" />
+    </fragment>
     <fragment
         android:id="@+id/ProfiloFragment"
         android:name="it.disco.unimib.GameBook.ui.profilo.ProfiloFragment"
@@ -29,4 +33,13 @@
         android:name="it.disco.unimib.GameBook.ui.ActivityLogin"
         android:label="activity_main_login"
         tools:layout="@layout/activity_main_login" />
+    <fragment
+        android:id="@+id/videoGameFragment"
+        android:name="it.disco.unimib.GameBook.ui.esplora.VideoGameFragment"
+        android:label="fragment_video_game"
+        tools:layout="@layout/fragment_video_game" >
+        <argument
+            android:name="VideoGame"
+            app:argType="it.disco.unimib.GameBook.models.VideoGame" />
+    </fragment>
 </navigation>

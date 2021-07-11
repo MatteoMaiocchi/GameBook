@@ -25,17 +25,17 @@ public class VideoGameResponseCallback implements IVideoGameResponseCallback {
     private final VideoGameService videoGameService;
     private final ResponseCallback responseCallback;
 
-    public VideoGameResponseCallback(ResponseCallback responseCallback, Application application) {
+    public VideoGameResponseCallback(ResponseCallback responseCallback) {
         this.videoGameService = ServiceLocator.getInstance().getNewsServiceWithRetrofit();
         //this.videoGameService = Api.getApi();
         this.responseCallback = responseCallback;
     }
 
     @Override
-    public void fetchVideoGame( int page) {
+    public void fetchVideoGame(String stringa) {
 
 
-        Call<Response> call = videoGameService.getGames(page, Constants.VIDEOGAME_API_KEY);
+        Call<Response> call = videoGameService.getGames(stringa,Constants.VIDEOGAME_API_KEY);
 
         call.enqueue(new Callback<Response>() {
             @Override
@@ -45,6 +45,11 @@ public class VideoGameResponseCallback implements IVideoGameResponseCallback {
 
                     List<VideoGame> videoGameList = response.body().getVideoGameList();
                     responseCallback.onResponse(videoGameList);
+                }
+
+                if (response.code() == 401){
+                    // Magic is here ( Handle the error as your way )
+                    Log.d("bella", "responde: " + response);
                 }
 
 

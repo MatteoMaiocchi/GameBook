@@ -1,5 +1,6 @@
 package it.disco.unimib.GameBook.ui.esplora;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import it.disco.unimib.GameBook.R;
 import it.disco.unimib.GameBook.models.VideoGame;
@@ -20,34 +22,52 @@ import it.disco.unimib.GameBook.ui.community.CommunityRecyclerViewAdapter;
 
 public class NuoviArriviAdapter extends RecyclerView.Adapter<NuoviArriviAdapter.NuoviArriviHolder>  {
 
-    ArrayList<VideoGame> videoGameArrayList;
+    private List<VideoGame> videoGameArrayList;
+    private OnItemClickListener onItemClickListener;
 
-    public NuoviArriviAdapter(ArrayList<VideoGame> videoGameArrayList) {
+    // Custom interface to intercept the click on an item of the RecyclerView
+    public interface OnItemClickListener {
+        void onItemClick(VideoGame videoGame);
+    }
+
+    public NuoviArriviAdapter(List<VideoGame> videoGameArrayList, OnItemClickListener onItemClickListener) {
+        Log.d("supremo", "momo");
         this.videoGameArrayList = videoGameArrayList;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
     @Override
     public NuoviArriviHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_nuovi_arrivi, parent, false);
+        Log.d("debug", "onCreate");
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_nuovi_arrivi, parent, false);
 
         return new NuoviArriviHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NuoviArriviAdapter.NuoviArriviHolder holder, int position) {
+        Log.d("sono in", "onbind");
         holder.bind(videoGameArrayList.get(position));
     }
 
     @Override
     public int getItemCount() {
+        if (videoGameArrayList != null) {
+            return videoGameArrayList.size();
+        }
         return 0;
     }
+
+    public void addData(List<VideoGame> videoGameArrayList) {
+        this.videoGameArrayList = videoGameArrayList;
+    }
+
 
     public class NuoviArriviHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
         TextView textView;
+
 
         public NuoviArriviHolder(@NonNull View itemView) {
             super(itemView);
@@ -56,7 +76,7 @@ public class NuoviArriviAdapter extends RecyclerView.Adapter<NuoviArriviAdapter.
         }
 
         public void bind(VideoGame videoGame) {
-
+            Log.d("pippo", "e paperino");
             if (videoGame != null) {
 
                 String url = videoGame.getBackground_image();
@@ -71,6 +91,14 @@ public class NuoviArriviAdapter extends RecyclerView.Adapter<NuoviArriviAdapter.
                             placeholder(R.drawable.ic_baseline_cloud_download_24).into(imageView);
                 }
                 textView.setText(videoGame.getName());
+                Log.d("nome", "videogame" + videoGame.getName());
+                Log.d("image", "url: " + newUrl);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View v) {
+                        onItemClickListener.onItemClick(videoGame);
+                    }
+                });
 
 
                 /*itemView.setOnClickListener(new View.OnClickListener() {

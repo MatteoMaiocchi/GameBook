@@ -133,9 +133,9 @@ public class VideoGame implements Parcelable {
     private String background_image;
     @SerializedName(value = "rating")
     @Expose
-    private Integer rating;
+    private double rating;
 
-    public VideoGame(Integer id, String name, String background_image, Integer rating) {
+    public VideoGame(Integer id, String name, String background_image, double rating) {
         this.id = id;
         this.name = name;
         this.background_image = background_image;
@@ -168,11 +168,11 @@ public class VideoGame implements Parcelable {
         this.background_image = background_image;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
@@ -197,14 +197,14 @@ public class VideoGame implements Parcelable {
         dest.writeInt(this.id);
         dest.writeString(this.name);
         dest.writeString(this.background_image);
-        dest.writeInt(this.rating);
+        dest.writeDouble(this.rating);
 
     }
     public void readFromParcel(Parcel source){
         this.id = source.readInt();
         this.name = source.readString();
         this.background_image = source.readString();
-        this.rating = source.readInt();
+        this.rating = source.readDouble();
     }
 
     protected VideoGame(Parcel in){
@@ -212,7 +212,7 @@ public class VideoGame implements Parcelable {
         this.id = in.readInt();
         this.name = in.readString();
         this.background_image = in.readString();
-        this.rating = in.readInt();
+        this.rating = in.readDouble();
     }
 
     public static final Parcelable.Creator<VideoGame> CREATOR = new Parcelable.Creator<VideoGame>(){

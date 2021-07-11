@@ -9,6 +9,6 @@ import retrofit2.http.Query;
 public interface VideoGameService {
     @GET("games")
     Call<Response> getGames(
-                            @Query("page_size") int page,
-                            @Header("Authorization") String apiKey);
+                            @Query("search") String stringa,
+                            @Query("key") String apiKey);
 }
