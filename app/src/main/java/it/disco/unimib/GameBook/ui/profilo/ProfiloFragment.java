@@ -1,8 +1,10 @@
 package it.disco.unimib.GameBook.ui.profilo;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -15,16 +17,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import it.disco.unimib.GameBook.R;
 
 public class ProfiloFragment extends Fragment {
 
     FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
     GoogleSignInClient mGoogleSignInClient;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,9 +44,25 @@ public class ProfiloFragment extends Fragment {
         mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+
+
         
         // Inflate the layout for this fragment
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ImageView imageView = view.findViewById(R.id.imageViewProfilo);
+
+        Uri url = firebaseUser.getPhotoUrl();
+        String newUrl = null;
+
+        //newUrl = url.replace("http://", "https://").trim();
+        Glide.with(getContext()).load(url).
+                placeholder(R.drawable.ic_baseline_cloud_download_24).into(imageView);
     }
 
     @Override

@@ -136,8 +136,8 @@ public class ActivityLogin extends AppCompatActivity {
              */
             Log.v("Error", "FANCULO");
             // Signed in successfully, show authenticated UI.
-            Intent intent = new Intent(ActivityLogin.this, MainActivity.class);
-            startActivity(intent);
+            //Intent intent = new Intent(ActivityLogin.this, MainActivity.class);
+            //startActivity(intent);
             Log.v("Error", "FANCULO2");
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.

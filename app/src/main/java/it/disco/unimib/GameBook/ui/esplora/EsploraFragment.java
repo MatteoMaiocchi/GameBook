@@ -45,11 +45,12 @@ public class EsploraFragment extends Fragment {
     private IVideoGameResponseCallback videogameRepository;
     private NuoviArriviAdapter nuoviArriviViewAdapter = null;
     private IVideogameRepositoryWithLiveData iVideogameRepositoryWithLiveData;
-    //private VideogameViewModel videogameViewModel;
+    private VideogameViewModel videogameViewModel;
 
     private boolean oK = false;
 
     private List<VideoGame> videoGamesApi;
+    private boolean ok;
 
     RecyclerView recyclerView;
 
@@ -76,16 +77,10 @@ public class EsploraFragment extends Fragment {
 
         iVideogameRepositoryWithLiveData = new VideogameRepositoryWithLiveData(requireActivity().getApplication());
 
-
         videoGamesApi = new ArrayList<>();
 
-
         recyclerView = view.findViewById(R.id.prova);
-
-
-
         recyclerView.setHasFixedSize(true);
-
         //LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         Log.d("momo", "bello");
         nuoviArriviViewAdapter = new NuoviArriviAdapter(videoGamesApi, new NuoviArriviAdapter.OnItemClickListener() {
@@ -97,12 +92,34 @@ public class EsploraFragment extends Fragment {
             }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
-
         recyclerView.setAdapter(nuoviArriviViewAdapter);
 
+        videogameViewModel = new ViewModelProvider(this, new VideoGameViewModelFactory(
+                requireActivity().getApplication(), iVideogameRepositoryWithLiveData, "")).get(VideogameViewModel.class);
 
+        final Observer<Response> observer = new Observer<Response>() {
+            @Override
+            public void onChanged(@Nullable final Response response) {
+                // Update the UI
+                if (response != null) {
+                    if (response.getCount() != -1) {
+                        ok = true;
+                        videoGamesApi.addAll(response.getVideoGameList());
+                        Log.d("passo2: ", "" + 2);
+                        requireActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                nuoviArriviViewAdapter.notifyDataSetChanged();
+                            }
+                        });
+                    } else {
+                        updateUIForFailure("Error");
+                    }
+                }
+            }
+        };
+
+        videogameViewModel.getResponseLiveData().observe(getViewLifecycleOwner(), observer);
 
         //videogameRepository.fetchVideoGame(page, stringa); //Stringa di ricerca
         //videogameRepository.fetchVideoGame(page, null); //Stringa di ricerca
@@ -165,7 +182,7 @@ public class EsploraFragment extends Fragment {
                 public boolean onQueryTextSubmit(String query) {
                     setUpRecyclerView(query);
                     Log.d("sto", "chiamando");
-                    oK = true;
+                    oK = false;
                     return false;
                 }
 
@@ -180,15 +197,25 @@ public class EsploraFragment extends Fragment {
         //}
     }
 
-    public void setUpRecyclerView(String stringa){
+    public void setUpRecyclerView(String stringa) {
         //nuoviArriviViewAdapter.addData(null);
         videoGamesApi.clear();
+        videogameViewModel.getMoreVideoGame(stringa);
         //videogameRepository.fetchVideoGame(stringa); //Stringa di ricerca
+        if (!ok) {
+            /*
+            videogameViewModel = new ViewModelProvider(this, new VideoGameViewModelFactory(
+                    requireActivity().getApplication(), iVideogameRepositoryWithLiveData, stringa)).get(VideogameViewModel.class);
 
-        VideogameViewModel videogameViewModel = new ViewModelProvider(this, new VideoGameViewModelFactory(
-                requireActivity().getApplication(), iVideogameRepositoryWithLiveData, stringa)).get(VideogameViewModel.class);
+             */
+        } else {
+            //videoGamesApi.clear();
+            //videogameViewModel.getMoreVideoGame(stringa);
+            }
 
-        Log.d("stringa: ", stringa);
+
+            Log.d("passo: ", "" + 1);
+            Log.d("stringa: ", stringa);
 
         /*videogameViewModel.getResponseLiveData().observe(getViewLifecycleOwner(), response -> {
             // Update the UI
@@ -201,21 +228,35 @@ public class EsploraFragment extends Fragment {
                 }
             }
         });*/
-
-        final Observer<Response> observer = new Observer<Response>() {
-            @Override
-            public void onChanged(@Nullable final Response response) {
-                // Update the UI
-                if (response != null) {
-                    if (response.getCount() != -1) {
-                        updateUIForSuccess(response.getVideoGameList());
-                    } else {
-                        updateUIForFailure("Error");
+            /*
+            final Observer<Response> observer = new Observer<Response>() {
+                @Override
+                public void onChanged(@Nullable final Response response) {
+                    // Update the UI
+                    if (response != null) {
+                        if (response.getCount() != -1) {
+                            ok = true;
+                            videoGamesApi.addAll(response.getVideoGameList());
+                            Log.d("passo2: ", "" + 2);
+                            requireActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    nuoviArriviViewAdapter.notifyDataSetChanged();
+                                }
+                            });
+                        } else {
+                            updateUIForFailure("Error");
+                        }
                     }
                 }
-            }
-        };
+            };
 
-        videogameViewModel.getResponseLiveData().observe(getViewLifecycleOwner(), observer);
-    }
+            videogameViewModel.getResponseLiveData().observe(getViewLifecycleOwner(), observer);
+
+             */
+
+            Log.d("observ: ", "" + 1);
+
+        }
+
 }

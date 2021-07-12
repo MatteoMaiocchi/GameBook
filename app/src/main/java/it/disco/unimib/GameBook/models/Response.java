@@ -17,6 +17,8 @@ public class Response implements Parcelable {
     @Expose
     private List<VideoGame> videoGameList = null;
 
+    public Response() {}
+
     public Response(Integer count, List<VideoGame> videoGameList) {
         this.count = count;
         this.videoGameList = videoGameList;
