@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_ProfiloFragment_to_activityLogin"
             app:destination="@id/activityLogin" />
+        <action
+            android:id="@+id/action_ProfiloFragment_to_preferitiFragment"
+            app:destination="@id/preferitiFragment" />
     </fragment>
     <activity
         android:id="@+id/activityLogin"
@@ -42,4 +45,9 @@
             android:name="VideoGame"
             app:argType="it.disco.unimib.GameBook.models.VideoGame" />
     </fragment>
+    <fragment
+        android:id="@+id/preferitiFragment"
+        android:name="it.disco.unimib.GameBook.ui.profilo.PreferitiFragment"
+        android:label="fragment_preferiti"
+        tools:layout="@layout/fragment_preferiti" />
 </navigation>

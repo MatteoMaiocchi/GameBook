@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -31,6 +34,7 @@ public class ProfiloFragment extends Fragment {
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     GoogleSignInClient mGoogleSignInClient;
+    ProfiloFragment profiloFragment = this;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,6 +60,16 @@ public class ProfiloFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ImageView imageView = view.findViewById(R.id.imageViewProfilo);
+        ImageButton button_preferiti = view.findViewById(R.id.button_preferiti);
+
+        button_preferiti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = NavHostFragment.findNavController(profiloFragment);
+                navController.navigate(
+                        R.id.action_ProfiloFragment_to_preferitiFragment);
+            }
+        });
 
         Uri url = firebaseUser.getPhotoUrl();
         String newUrl = null;

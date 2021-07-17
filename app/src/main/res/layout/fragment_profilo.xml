@@ -29,14 +29,14 @@
 
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/button_griglia"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:src="@drawable/ic_baseline_grid_on_24" />
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/button_preferiti"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -46,6 +46,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+
             android:layout_width="match_parent"
             android:layout_height="430dp"
             android:layout_below="@id/linearLayout"

@@ -134,15 +134,19 @@ public class VideoGame implements Parcelable {
     @SerializedName(value = "rating")
     @Expose
     private double rating;
+    @SerializedName(value = "tba")
+    @Expose
+    private boolean tba;
 
-    public VideoGame(Integer id, String name, String background_image, double rating) {
+    public VideoGame(Integer id, String name, String background_image, double rating, boolean tba) {
         this.id = id;
         this.name = name;
         this.background_image = background_image;
         this.rating = rating;
+        this.tba = tba;
     }
 
-
+    public VideoGame() {}
 
     public int getId() {
         return id;
@@ -176,6 +180,14 @@ public class VideoGame implements Parcelable {
         this.rating = rating;
     }
 
+    public boolean getTba() {
+        return tba;
+    }
+
+    public void setTba(boolean tba) {
+        this.tba = tba;
+    }
+
     @Override
     public String toString() {
         return "VideoGame{" +
@@ -183,6 +195,7 @@ public class VideoGame implements Parcelable {
                 ", name='" + name + '\'' +
                 ", background_image='" + background_image + '\'' +
                 ", rating=" + rating +
+                ", tba=" + tba +
                 '}';
     }
 
