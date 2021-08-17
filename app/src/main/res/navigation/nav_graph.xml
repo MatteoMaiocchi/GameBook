@@ -8,12 +8,12 @@
     <fragment
         android:id="@+id/CommunityFragment"
         android:name="it.disco.unimib.GameBook.ui.community.CommunityFragment"
-        android:label="fragment_community"
+        android:label=""
         tools:layout="@layout/fragment_community" />
     <fragment
         android:id="@+id/EsploraFragment"
         android:name="it.disco.unimib.GameBook.ui.esplora.EsploraFragment"
-        android:label="fragment_esplora"
+        android:label=""
         tools:layout="@layout/fragment_esplora" >
         <action
             android:id="@+id/action_EsploraFragment_to_videoGameFragment"
@@ -22,7 +22,7 @@
     <fragment
         android:id="@+id/ProfiloFragment"
         android:name="it.disco.unimib.GameBook.ui.profilo.ProfiloFragment"
-        android:label="fragment_profilo"
+        android:label=""
         tools:layout="@layout/fragment_profilo" >
         <action
             android:id="@+id/action_ProfiloFragment_to_activityLogin"
@@ -30,16 +30,26 @@
         <action
             android:id="@+id/action_ProfiloFragment_to_preferitiFragment"
             app:destination="@id/preferitiFragment" />
+        <action
+            android:id="@+id/action_ProfiloFragment_to_videoGameFragment"
+            app:destination="@id/videoGameFragment" />
+        <action
+            android:id="@+id/action_ProfiloFragment_to_settingsActivity"
+            app:destination="@id/settingsActivity" />
+        <action
+            android:id="@+id/action_ProfiloFragment_to_raccoltaFragment"
+            app:destination="@id/raccoltaFragment" />
     </fragment>
     <activity
         android:id="@+id/activityLogin"
         android:name="it.disco.unimib.GameBook.ui.ActivityLogin"
         android:label="activity_main_login"
         tools:layout="@layout/activity_main_login" />
+
     <fragment
         android:id="@+id/videoGameFragment"
         android:name="it.disco.unimib.GameBook.ui.esplora.VideoGameFragment"
-        android:label="fragment_video_game"
+        android:label=""
         tools:layout="@layout/fragment_video_game" >
         <argument
             android:name="VideoGame"
@@ -48,6 +58,26 @@
     <fragment
         android:id="@+id/preferitiFragment"
         android:name="it.disco.unimib.GameBook.ui.profilo.PreferitiFragment"
-        android:label="fragment_preferiti"
-        tools:layout="@layout/fragment_preferiti" />
+        android:label=""
+        tools:layout="@layout/fragment_preferiti" >
+        <action
+            android:id="@+id/action_preferitiFragment_to_videoGameFragment"
+            app:destination="@id/videoGameFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/settingsActivity"
+        android:name="it.disco.unimib.GameBook.utils.SettingsActivity"
+        android:label="Settings"
+        tools:layout="@layout/activity_settings" >
+
+    </activity>
+    <fragment
+        android:id="@+id/raccoltaFragment"
+        android:name="it.disco.unimib.GameBook.ui.profilo.RaccoltaFragment"
+        android:label="fragment_raccolta"
+        tools:layout="@layout/fragment_raccolta" >
+        <action
+            android:id="@+id/action_raccoltaFragment_to_videoGameFragment"
+            app:destination="@id/videoGameFragment" />
+    </fragment>
 </navigation>

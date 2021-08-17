@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -71,7 +72,13 @@ public class PreferitiFragment extends Fragment {
                     .setQuery(query, VideoGame.class)
                     .build();
 
-            preferitiAdapter = new PreferitiAdapter(options);
+            preferitiAdapter = new PreferitiAdapter(options, new PreferitiAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(VideoGame videoGame) {
+                    PreferitiFragmentDirections.ActionPreferitiFragmentToVideoGameFragment action = PreferitiFragmentDirections.actionPreferitiFragmentToVideoGameFragment(videoGame);
+                    Navigation.findNavController(view).navigate(action);
+                }
+            });
             preferitiAdapter.startListening();
             recyclerView.setAdapter(preferitiAdapter);
         }else{

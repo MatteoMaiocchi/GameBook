@@ -24,7 +24,7 @@ public class CommunityAdapter extends FirestoreRecyclerAdapter<User, CommunityAd
     //associa il dato alla view
     @Override
     protected void onBindViewHolder(@NonNull CommunityHolder holder, int position, @NonNull User model) {
-        holder.email.setText(model.getEmail());
+        holder.username.setText(model.getUsername());
     }
 
     //rappresenta la view che verrà popolata con un elemento
@@ -39,11 +39,11 @@ public class CommunityAdapter extends FirestoreRecyclerAdapter<User, CommunityAd
 
     //riferimenti alla rappresentazione visiva
     public class CommunityHolder extends RecyclerView.ViewHolder{
-        TextView email;
+        TextView username;
 
         public CommunityHolder(@NonNull View itemView) {
             super(itemView);
-            email = itemView.findViewById(R.id.Email);
+            username = itemView.findViewById(R.id.Email);
         }
     }
 }

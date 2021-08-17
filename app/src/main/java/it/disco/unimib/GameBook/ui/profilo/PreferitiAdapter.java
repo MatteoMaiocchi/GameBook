@@ -18,13 +18,21 @@ import it.disco.unimib.GameBook.R;
 import it.disco.unimib.GameBook.models.VideoGame;
 import it.disco.unimib.GameBook.ui.community.CommunityAdapter;
 import it.disco.unimib.GameBook.ui.community.User;
+import it.disco.unimib.GameBook.ui.esplora.NuoviArriviAdapter;
+
 
 public class PreferitiAdapter extends FirestoreRecyclerAdapter<VideoGame, PreferitiAdapter.PreferitiHolder> {
 
+    private OnItemClickListener onItemClickListener;
 
+    // Custom interface to intercept the click on an item of the RecyclerView
+    public interface OnItemClickListener {
+        void onItemClick(VideoGame videoGame);
+    }
 
-    public PreferitiAdapter(FirestoreRecyclerOptions<VideoGame> options) {
+    public PreferitiAdapter(FirestoreRecyclerOptions<VideoGame> options, OnItemClickListener onItemClickListener) {
         super(options);
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
@@ -71,11 +79,11 @@ public class PreferitiAdapter extends FirestoreRecyclerAdapter<VideoGame, Prefer
                 Log.d("nome", "videogame" + videoGame.getName());
                 Log.d("image", "url: " + newUrl);
 
-                /*itemView.setOnClickListener(new View.OnClickListener() {
+                itemView.setOnClickListener(new View.OnClickListener() {
                     @Override public void onClick(View v) {
                         onItemClickListener.onItemClick(videoGame);
                     }
-                });*/
+                });
             }
         }
     }

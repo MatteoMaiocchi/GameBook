@@ -2,12 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
+    <!--item
         android:id="@+id/log_out"
         android:title="Log Out"
+        android:icon=""
         app:showAsAction="never">
+    </item>-->
 
-
+    <item
+        android:id="@+id/modifica_profilo"
+        android:title="Impostazioni"
+        android:icon="@drawable/ic_baseline_settings_24"
+        app:showAsAction="never">
     </item>
 
 

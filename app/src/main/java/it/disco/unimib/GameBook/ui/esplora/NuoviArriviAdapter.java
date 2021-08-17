@@ -12,12 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import it.disco.unimib.GameBook.R;
 import it.disco.unimib.GameBook.models.VideoGame;
-import it.disco.unimib.GameBook.ui.community.CommunityRecyclerViewAdapter;
 
 
 public class NuoviArriviAdapter extends RecyclerView.Adapter<NuoviArriviAdapter.NuoviArriviHolder>  {

@@ -4,6 +4,7 @@ import android.app.Application;
 
 
 import it.disco.unimib.GameBook.services.VideoGameService;
+import it.disco.unimib.GameBook.services.VideoGameServiceTopRating;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -25,6 +26,10 @@ public class ServiceLocator {
     public VideoGameService getNewsServiceWithRetrofit() {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.VIDEOGAME_API_BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         return retrofit.create(VideoGameService.class);
+    }
+    public VideoGameServiceTopRating getGamesTopRatingServiceWithRetrofit() {
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.VIDEOGAME_API_BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        return retrofit.create(VideoGameServiceTopRating.class);
     }
 
 

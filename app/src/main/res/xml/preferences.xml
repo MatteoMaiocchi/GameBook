@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        android:title="Generale"
+        app:iconSpaceReserved="true">
+
+        <ListPreference
+            android:key="night"
+            android:title="Tema"
+            app:iconSpaceReserved="true"
+            android:entries="@array/night_entries"
+            android:dialogTitle="Tema"
+            android:entryValues="@array/night_values"
+            android:defaultValue="1"
+            android:icon="@drawable/ic_baseline_nights_stay_24"
+            app:useSimpleSummaryProvider="true">
+
+        </ListPreference>
+        <SwitchPreferenceCompat
+            android:key="prova"
+            android:title="prova"
+            android:summary="android"
+            android:icon="@drawable/ic_baseline_nights_stay_24"
+            android:defaultValue="false">
+        </SwitchPreferenceCompat>
+        <Preference
+            android:key="logout"
+            android:title="Log Out"
+            android:icon="@drawable/ic_baseline_account_circle_24"
+            app:iconSpaceReserved="true">
+
+        </Preference>
+        <EditTextPreference
+            android:key="username"
+            android:title="Modifica username"
+            app:iconSpaceReserved="true"
+            app:useSimpleSummaryProvider="true">
+
+        </EditTextPreference>
+        <Preference
+            android:key="delete"
+            android:title="Elimina account"
+            app:iconSpaceReserved="true"
+            android:icon="@drawable/ic_baseline_delete_forever_24">
+
+        </Preference>
+        <Preference
+            android:key="photo"
+            android:title="Immagine profilo"
+            android:summary="cambia immagine profilo"
+            android:icon="@drawable/ic_baseline_photo_camera_24"
+            android:enabled="false"
+            app:iconSpaceReserved="true">
+
+        </Preference>
+
+    </PreferenceCategory>
+</PreferenceScreen>

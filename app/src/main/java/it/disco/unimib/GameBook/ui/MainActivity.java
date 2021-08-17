@@ -6,29 +6,36 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.PreferenceManager;
 
-import android.content.Intent;
-import android.net.Uri;
+import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import it.disco.unimib.GameBook.R;
 import it.disco.unimib.GameBook.databinding.ActivityMainBinding;
+import it.disco.unimib.GameBook.ui.esplora.EsploraFragment;
+import it.disco.unimib.GameBook.utils.Constants;
+
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
+    SharedPreferences prefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main_login);
-
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean prova = prefs.getBoolean(Constants.PROVA, false);
+        prefs.edit().putBoolean(Constants.PROVA, false).apply();
+        Log.d("qwe", prova + "");
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
@@ -38,6 +45,71 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.bottomNav, navController);
 
+
+
+        /*
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.e("qwe", "cazzo");
+            }
+        }, 5000);
+
+         */
+
+
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private void Download()
+    {
+
+        new AsyncTask<String, String, Boolean>()
+        {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected Boolean doInBackground(String... strings) {
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean aBoolean) {
+                super.onPostExecute(aBoolean);
+            }
+        }.execute();
+    }
+    private static class DownloadFile extends AsyncTask<String, String, Boolean>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Boolean doInBackground(String... strings) {
+            for (int i = 0; i<500000; i++)
+            {
+                Log.d("qwe", i + "");
+                return false;
+            }
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean s) {
+            super.onPostExecute(s);
+
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+        }
     }
 
     @Override
@@ -47,5 +119,12 @@ public class MainActivity extends AppCompatActivity {
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+
     }
 }

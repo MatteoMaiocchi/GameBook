@@ -89,6 +89,9 @@ public class CommunityFragment extends Fragment {
         FirestoreRecyclerOptions<User> options = new FirestoreRecyclerOptions.Builder<User>()
                 .setQuery(query, User.class)
                 .build();
+        communityAdapter = new CommunityAdapter(options);
+        communityAdapter.startListening();
+        recyclerView.setAdapter(communityAdapter);
 
 
 
@@ -210,8 +213,7 @@ public class CommunityFragment extends Fragment {
 
     private void setUpRecyclerView(String text) {
         // Configure recycler adapter
-
-        Query query = firebaseFirestore.collection("users").orderBy("email").startAt(text).endAt(text + "\uf8ff");
+        Query query = firebaseFirestore.collection("users").orderBy("username").startAt(text).endAt(text + "\uf8ff");
 
         FirestoreRecyclerOptions<User> options = new FirestoreRecyclerOptions.Builder<User>()
                 .setQuery(query, User.class)

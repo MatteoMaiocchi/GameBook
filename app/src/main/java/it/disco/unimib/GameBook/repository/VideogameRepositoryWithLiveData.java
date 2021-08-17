@@ -34,6 +34,10 @@ public class VideogameRepositoryWithLiveData implements IVideogameRepositoryWith
 
     @Override
     public MutableLiveData<Response> fetchVideogames(String stringa) {
+        if (stringa.equals("-rating"))
+        {
+
+        }
         Call<Response> call = videoGameService.getGames(stringa,Constants.VIDEOGAME_API_KEY);
 
         call.enqueue(new Callback<Response>() {
@@ -50,7 +54,7 @@ public class VideogameRepositoryWithLiveData implements IVideogameRepositoryWith
             @Override
             public void onFailure(@NonNull Call<Response> call, @NonNull Throwable t) {
                 mResponseLiveData.postValue(new Response(-1, null)); //in caso di errore, count a -1
-                Log.d("code: ", "");
+                Log.d("code: ", t.getMessage());
             }
         });
         return mResponseLiveData;

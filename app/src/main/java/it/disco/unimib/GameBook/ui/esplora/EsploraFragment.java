@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
@@ -55,6 +56,7 @@ public class EsploraFragment extends Fragment {
     RecyclerView recyclerView;
 
     private int page;
+    private ProgressBar progressBar;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -78,7 +80,7 @@ public class EsploraFragment extends Fragment {
         iVideogameRepositoryWithLiveData = new VideogameRepositoryWithLiveData(requireActivity().getApplication());
 
         videoGamesApi = new ArrayList<>();
-
+        progressBar = view.findViewById(R.id.progressBar);
         recyclerView = view.findViewById(R.id.prova);
         recyclerView.setHasFixedSize(true);
         //LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -105,11 +107,13 @@ public class EsploraFragment extends Fragment {
                     if (response.getCount() != -1) {
                         ok = true;
                         videoGamesApi.addAll(response.getVideoGameList());
+                        progressBar.setVisibility(View.GONE);
                         Log.d("passo2: ", "" + 2);
                         requireActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 nuoviArriviViewAdapter.notifyDataSetChanged();
+                                progressBar.setVisibility(View.GONE);
                             }
                         });
                     } else {
@@ -125,6 +129,8 @@ public class EsploraFragment extends Fragment {
         //videogameRepository.fetchVideoGame(page, null); //Stringa di ricerca
 
         Log.d("pirla", "pirla");
+
+
 
     }
 
@@ -258,5 +264,6 @@ public class EsploraFragment extends Fragment {
             Log.d("observ: ", "" + 1);
 
         }
+
 
 }

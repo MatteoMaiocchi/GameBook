@@ -34,7 +34,7 @@ public class CommunityRecyclerViewAdapter extends RecyclerView.Adapter<Community
     @Override
     public void onBindViewHolder(@NonNull CommunityRecyclerViewAdapter.CommunityViewHolder holder, int position) {
 
-        holder.email.setText(userArrayList.get(position).getEmail());
+        holder.email.setText(userArrayList.get(position).getUsername());
     }
 
     @Override

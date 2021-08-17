@@ -18,14 +18,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,11 +41,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import it.disco.unimib.GameBook.R;
 import it.disco.unimib.GameBook.models.VideoGame;
 import it.disco.unimib.GameBook.ui.MainActivity;
+
 
 public class VideoGameFragment extends Fragment {
 
@@ -51,6 +57,9 @@ public class VideoGameFragment extends Fragment {
     boolean choose = false;
 
     private VideoGame videoGame;
+    private ProgressBar progressBar;
+    private Button button;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,6 +79,7 @@ public class VideoGameFragment extends Fragment {
 
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_video_game, container, false);
     }
@@ -88,6 +98,10 @@ public class VideoGameFragment extends Fragment {
         TextView textView = view.findViewById(R.id.titoloVideoGame);
         ImageView imageView = view.findViewById(R.id.imageViewVideoGame);
         CheckBox checkBox = view.findViewById(R.id.favorite);
+        button = view.findViewById(R.id.aggiungi);
+        progressBar = view.findViewById(R.id.progressbar);
+
+
 
         if (videoGame != null) {
 
@@ -125,6 +139,23 @@ public class VideoGameFragment extends Fragment {
                             }
                         }
                     });
+            //button.setVisibility(view.INVISIBLE);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    DocumentReference documentReference = db.collection("users").document(firebaseAuth.getCurrentUser().getUid()).collection("raccolta").document(videoGame.getName());
+
+                    Map<String, Object> user = new HashMap<>();
+                    user.put("name", videoGame.getName());
+                    user.put("background_image", videoGame.getBackground_image());
+                    documentReference.set(user);
+                    button.setVisibility(View.GONE);
+
+                }
+            });
+
+
         }
 
 
@@ -147,10 +178,15 @@ public class VideoGameFragment extends Fragment {
                     choose = false;
                 }
             }});
+        readDB();
+
+
+
+
         }
 
 
-
+    /*
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.top_menu_videogame, menu);
@@ -176,5 +212,51 @@ public class VideoGameFragment extends Fragment {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+     */
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        readDB();
+
+    }
+
+    public void readDB(){
+        db.collection("users").document(Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid()).collection("raccolta")
+                .whereEqualTo("name",videoGame.getName())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        Log.d("raccolta", "bottone gone");
+                        if(!queryDocumentSnapshots.getDocuments().isEmpty()){
+
+                            List<DocumentSnapshot> documentSnapshots = queryDocumentSnapshots.getDocuments();
+                            Log.d("raccolta",documentSnapshots.toString());
+                            progressBar.setVisibility(View.GONE);
+                            //button.setVisibility(view.INVISIBLE);
+                            for(DocumentSnapshot documentSnapshot: documentSnapshots){
+                                Log.d("raccolta", Objects.requireNonNull(documentSnapshot.getData()).toString());
+                            }
+                        }else{
+                            button.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
+                        }
+
+                    }
+
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull  Exception e) {
+                        button.setVisibility(View.VISIBLE);
+                        Log.d("raccolta", "bottone visible");
+                        progressBar.setVisibility(View.GONE);
+                    }
+                });
+
+
     }
 }

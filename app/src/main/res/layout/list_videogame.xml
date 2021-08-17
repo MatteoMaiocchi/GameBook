@@ -1,19 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="240dp"
+    android:layout_height="180dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginRight="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="?attr/selectableItemBackground">
 
-        <ImageView
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageView_videogame"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="160dp"
+            android:scaleType="center"
+            android:adjustViewBounds="false">
 
-        </ImageView>
+
+        </androidx.appcompat.widget.AppCompatImageView>
+
+        <TextView
+            android:id="@+id/titolo_videogame"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Nome">
+
+        </TextView>
+
 
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

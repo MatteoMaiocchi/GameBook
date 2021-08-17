@@ -1,6 +1,7 @@
 package it.disco.unimib.GameBook.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 //import androidx.annotation.NonNull;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -18,6 +20,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 //import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
 //import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -35,6 +38,8 @@ import java.util.Map;
 
 import it.disco.unimib.GameBook.R;
 import it.disco.unimib.GameBook.databinding.ActivityMainLoginBinding;
+import it.disco.unimib.GameBook.utils.Constants;
+
 
 public class ActivityLogin extends AppCompatActivity {
     ActivityMainLoginBinding binding;
@@ -42,7 +47,9 @@ public class ActivityLogin extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore db;
+    private FirebaseUser firebaseUser;
     private static final String TAG = "GOOGLE_SIGN_IN_TAG";
+    SharedPreferences prefs;
    
 
     GoogleSignInClient mGoogleSignInClient;
@@ -51,7 +58,7 @@ public class ActivityLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main_login);
-
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         binding = ActivityMainLoginBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
@@ -63,7 +70,8 @@ public class ActivityLogin extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-        
+        firebaseUser = firebaseAuth.getCurrentUser();
+        //firebaseUser = null;
 
         //sign_in_button = findViewById(R.id.sign_in_button);
         //sign_in_button.setSize(SignInButton.SIZE_STANDARD);
@@ -86,11 +94,70 @@ public class ActivityLogin extends AppCompatActivity {
 
             }
         });
+        /*
+        firebaseAuth.signInAnonymously()
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "fanculo2");
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInAnonymously:success");
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInAnonymously:failure", task.getException());
+                            //Toast.makeText(ActivityLogin.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+
+         */
+
+
+
+        binding.anonymous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "fanculo1");
+                    if(firebaseUser == null){
+                        anonymous();
+                        Log.d(TAG, "fanculo3");
+                        startActivity(new Intent(ActivityLogin.this, MainActivity.class));
+                    }
+
+
+        }});
+
+
+
+
+    }
+    public void anonymous(){
+        firebaseAuth.signInAnonymously()
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "fanculo2");
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInAnonymously:success");
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInAnonymously:failure", task.getException());
+                            //Toast.makeText(ActivityLogin.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+
 
 
     }
     /*
-    private void signIn() {
+    private void signedIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -102,6 +169,7 @@ public class ActivityLogin extends AppCompatActivity {
         FirebaseUser firebaseUser =firebaseAuth.getCurrentUser();
         if(firebaseUser != null){
             startActivity(new Intent(ActivityLogin.this, MainActivity.class));
+            finish();
         }
     }
 
@@ -147,6 +215,11 @@ public class ActivityLogin extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (firebaseAuth != null)
+            super.onBackPressed();
+    }
 
     private void firebaseAuthWithGoogleAccount(GoogleSignInAccount account) {
         Log.d(TAG, "firebaseAuthWithGoogleAccount: begin firebase auth auth doodle account");
@@ -158,33 +231,44 @@ public class ActivityLogin extends AppCompatActivity {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         Log.d(TAG, "onSuccess: Logged in");
+                        prefs.edit().putString(Constants.LOGIN_CREDENTIAL, account.getIdToken()).apply();
                         //get loggged in user
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                         //get user info
                         String uid = firebaseUser.getUid();
                         String email = firebaseUser.getEmail();
                         Uri foto = firebaseUser.getPhotoUrl();
+
+
+                        // Create a new user
+                        String[] split = firebaseAuth.getCurrentUser().getEmail().split("@");
+                        String username = split[0];
+                        Log.d("UID", "id: " + username);
+
+
                         //check id user is new or exsisting
                         if(authResult.getAdditionalUserInfo().isNewUser()){
                             Log.d(TAG, "onSuccess: Account created" +email);
                             Toast.makeText(ActivityLogin.this, "Account created"+email, Toast.LENGTH_SHORT).show();
+                            //CollectionReference documentReference = db.collection("users").document(firebaseAuth.getCurrentUser().getUid()).collection("game");
+                            DocumentReference documentReference = db.collection("users").document(firebaseAuth.getCurrentUser().getUid());
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("email", firebaseAuth.getCurrentUser().getEmail());
+                            user.put("foto", firebaseAuth.getCurrentUser().getPhotoUrl().toString());
+                            user.put("username", username);
+                            documentReference.set(user);
+
 
                         }
                         else{
                             Log.d(TAG, "onSuccess: Existing User" + email);
-                            Toast.makeText(ActivityLogin.this, "onSuccess: Existing User"+email, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(ActivityLogin.this, "onSuccess: Existing User"+email, Toast.LENGTH_SHORT).show();
+
                         }
 
 
                         Log.d("UID", "id: " + firebaseAuth.getUid());
 
-                        // Create a new user
-                        //CollectionReference documentReference = db.collection("users").document(firebaseAuth.getCurrentUser().getUid()).collection("game");
-                        DocumentReference documentReference = db.collection("users").document(firebaseAuth.getCurrentUser().getUid());
-                        Map<String, Object> user = new HashMap<>();
-                        user.put("email", firebaseAuth.getCurrentUser().getEmail());
-                        user.put("foto", firebaseAuth.getCurrentUser().getPhotoUrl().toString());
-                        documentReference.set(user);
 
 
                         //start profile activity
