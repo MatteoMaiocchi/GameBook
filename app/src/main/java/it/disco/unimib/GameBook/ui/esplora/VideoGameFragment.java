@@ -18,6 +18,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -59,7 +61,7 @@ public class VideoGameFragment extends Fragment {
     private VideoGame videoGame;
     private ProgressBar progressBar;
     private Button button;
-
+    Animation anim;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -143,7 +145,8 @@ public class VideoGameFragment extends Fragment {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    anim = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_bottom);
+                    button.startAnimation(anim);
                     DocumentReference documentReference = db.collection("users").document(firebaseAuth.getCurrentUser().getUid()).collection("raccolta").document(videoGame.getName());
 
                     Map<String, Object> user = new HashMap<>();
