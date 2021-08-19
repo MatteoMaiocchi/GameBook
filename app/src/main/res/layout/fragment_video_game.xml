@@ -7,6 +7,16 @@
     tools:context=".ui.esplora.VideoGameFragment">
 
 
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favorite" />
+
     <ImageView
         android:id="@+id/imageViewVideoGame"
         android:layout_width="match_parent"
@@ -29,12 +39,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewVideoGame" />
 
+    <TextView
+        android:id="@+id/dataUscita"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Data di uscita"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
     <CheckBox
         android:id="@+id/favorite"
         android:layout_width="42dp"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
         android:layout_marginTop="12dp"
         android:button="@drawable/sl_favourite_24dp"
         app:buttonTint="@android:color/holo_red_light"
@@ -49,6 +70,19 @@
         android:text="Aggiungi alla lista"
         android:visibility="gone"
         app:icon="@drawable/ic_add_24dp"
+        app:iconGravity="textStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/rimuovi"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="413dp"
+        android:layout_height="40dp"
+        android:text="Rimuovi dalla lista"
+        android:visibility="gone"
+        app:icon="@drawable/ic_baseline_delete_forever_24"
         app:iconGravity="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

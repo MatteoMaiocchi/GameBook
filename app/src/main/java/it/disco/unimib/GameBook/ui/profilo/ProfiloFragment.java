@@ -56,6 +56,8 @@ import java.util.concurrent.Executors;
 import hari.bounceview.BounceView;
 import it.disco.unimib.GameBook.R;
 import it.disco.unimib.GameBook.models.VideoGame;
+import it.disco.unimib.GameBook.ui.community.CommunityFragment;
+import it.disco.unimib.GameBook.ui.community.User;
 import it.disco.unimib.GameBook.utils.Constants;
 
 
@@ -72,6 +74,8 @@ public class ProfiloFragment extends Fragment {
     TextView textView;
     ImageView imageView;
     Context context;
+
+    User user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,11 +97,19 @@ public class ProfiloFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        if(getArguments().isEmpty()){
+            user = null;
+        }else{
+            user = ProfiloFragmentArgs.fromBundle(getArguments()).getUser();
+        }
+
+
         imageView = view.findViewById(R.id.imageViewProfilo);
         //ImageButton button_preferiti = view.findViewById(R.id.button_preferiti);
         textView = view.findViewById(R.id.username);
         Button button1_veditutti = view.findViewById(R.id.veditutto_lista);
         Button button2_veditutti = view.findViewById(R.id.veditutto_lista_preferiti);
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         recyclerView1 =view.findViewById(R.id.recyclerview_lista);
@@ -107,13 +119,14 @@ public class ProfiloFragment extends Fragment {
         recyclerView1.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView2.setHasFixedSize(true);
         recyclerView2.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        if(!firebaseUser.isAnonymous())
-        {
-            setUpRecyclerView1(view);
-            setUpRecyclerView2(view);
-        }
 
+        //if(!firebaseUser.isAnonymous())
+        //{
 
+        setUpRecyclerView1(view, user);
+        setUpRecyclerView2(view, user);
+
+        //}
 
         preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
 
@@ -163,17 +176,19 @@ public class ProfiloFragment extends Fragment {
             }
         });
 
-
-
-
     }
 
 
-    private void setUpRecyclerView1(View view) {
+    private void setUpRecyclerView1(View view, User user) {
+        Query query = null;
 
-        Query query = db.collection("users").document(firebaseAuth.getCurrentUser().getUid()).collection("raccolta")
-                .limit(5);
-
+        if(user != null){
+            query = db.collection("users").document(user.getId()).collection("raccolta")
+                    .limit(5);
+        }else {
+            query = db.collection("users").document(firebaseAuth.getCurrentUser().getUid()).collection("raccolta")
+                    .limit(5);
+        }
         FirestoreRecyclerOptions<VideoGame> options = new FirestoreRecyclerOptions.Builder<VideoGame>()
                 .setQuery(query, VideoGame.class)
                 .build();
@@ -186,10 +201,33 @@ public class ProfiloFragment extends Fragment {
         });
         preferitiAdapter.startListening();
         recyclerView1.setAdapter(preferitiAdapter);
+
     }
     @Override
     public void onResume() {
         super.onResume();
+
+        if(user != null){
+            db.document("users" + "/" + Objects.requireNonNull(user.getId()))
+                    .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if(task.isSuccessful()) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if(documentSnapshot != null && documentSnapshot.exists()){
+                            String username = documentSnapshot.getString("username");
+                            String newValue = preferences.getString(Constants.USERNAME, username);
+                            textView.setText(newValue);
+                            String photo = documentSnapshot.getString("foto");
+                            if (photo != null){
+                                getPhotoUrl(photo);
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
         db.document("users" + "/" + Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid())
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -200,19 +238,6 @@ public class ProfiloFragment extends Fragment {
                         String username = documentSnapshot.getString("username");
                         String newValue = preferences.getString(Constants.USERNAME, username);
                         textView.setText(newValue);
-
-                    }
-                }
-            }
-        });
-
-        db.document("users" + "/" + Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid())
-                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()) {
-                    DocumentSnapshot documentSnapshot = task.getResult();
-                    if(documentSnapshot != null && documentSnapshot.exists()){
                         String photo = documentSnapshot.getString("foto");
                         if (photo != null){
                             getPhotoUrl(photo);
@@ -222,6 +247,7 @@ public class ProfiloFragment extends Fragment {
                 }
             }
         });
+
     }
     private void getPhotoUrl(String url){
         ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -260,10 +286,15 @@ public class ProfiloFragment extends Fragment {
         this.context = context;
     }
 
-    private void setUpRecyclerView2(View view) {
-
-        Query query = db.collection("users").document(firebaseAuth.getCurrentUser().getUid()).collection("preferiti")
-                .limit(5);
+    private void setUpRecyclerView2(View view, User user) {
+        Query query = null;
+        if(user != null){
+            query = db.collection("users").document(user.getId()).collection("preferiti")
+                    .limit(5);
+        }else {
+            query = db.collection("users").document(firebaseAuth.getCurrentUser().getUid()).collection("preferiti")
+                    .limit(5);
+        }
 
         FirestoreRecyclerOptions<VideoGame> options = new FirestoreRecyclerOptions.Builder<VideoGame>()
                 .setQuery(query, VideoGame.class)

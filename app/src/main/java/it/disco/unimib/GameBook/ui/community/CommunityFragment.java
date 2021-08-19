@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,7 +49,6 @@ public class CommunityFragment extends Fragment {
 
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -89,7 +89,14 @@ public class CommunityFragment extends Fragment {
         FirestoreRecyclerOptions<User> options = new FirestoreRecyclerOptions.Builder<User>()
                 .setQuery(query, User.class)
                 .build();
-        communityAdapter = new CommunityAdapter(options);
+        communityAdapter = new CommunityAdapter(options, new CommunityAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(User user) {
+                CommunityFragmentDirections.ActionCommunityFragmentToProfiloFragment actionCommunityFragmentToProfiloFragment =
+                        CommunityFragmentDirections.actionCommunityFragmentToProfiloFragment(user);
+                Navigation.findNavController(view).navigate(actionCommunityFragmentToProfiloFragment);
+            }
+        });
         communityAdapter.startListening();
         recyclerView.setAdapter(communityAdapter);
 
@@ -219,7 +226,14 @@ public class CommunityFragment extends Fragment {
                 .setQuery(query, User.class)
                 .build();
 
-        communityAdapter = new CommunityAdapter(options);
+        communityAdapter = new CommunityAdapter(options, new CommunityAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(User user) {
+                CommunityFragmentDirections.ActionCommunityFragmentToProfiloFragment actionCommunityFragmentToProfiloFragment =
+                        CommunityFragmentDirections.actionCommunityFragmentToProfiloFragment(user);
+                Navigation.findNavController(getView()).navigate(actionCommunityFragmentToProfiloFragment);
+            }
+        });
         communityAdapter.startListening();
         recyclerView.setAdapter(communityAdapter);
 

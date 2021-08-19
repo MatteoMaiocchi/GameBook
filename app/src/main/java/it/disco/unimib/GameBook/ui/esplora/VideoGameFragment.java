@@ -1,5 +1,6 @@
 package it.disco.unimib.GameBook.ui.esplora;
 
+import android.media.Rating;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -60,8 +62,11 @@ public class VideoGameFragment extends Fragment {
 
     private VideoGame videoGame;
     private ProgressBar progressBar;
+    private Button rimuovi;
     private Button button;
     Animation anim;
+
+    FirebaseUser firebaseUser;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -79,7 +84,7 @@ public class VideoGameFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        firebaseUser = firebaseAuth.getCurrentUser();
 
 
         // Inflate the layout for this fragment
@@ -99,10 +104,19 @@ public class VideoGameFragment extends Fragment {
         videoGame = VideoGameFragmentArgs.fromBundle(getArguments()).getVideoGame();
         TextView textView = view.findViewById(R.id.titoloVideoGame);
         ImageView imageView = view.findViewById(R.id.imageViewVideoGame);
+        RatingBar ratingBar = view.findViewById(R.id.ratingBar);
+        TextView released = view.findViewById(R.id.dataUscita);
         CheckBox checkBox = view.findViewById(R.id.favorite);
         button = view.findViewById(R.id.aggiungi);
+        rimuovi = view.findViewById(R.id.rimuovi);
         progressBar = view.findViewById(R.id.progressbar);
 
+        if(firebaseUser.isAnonymous()){
+            button.setVisibility(View.GONE);
+            rimuovi.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
+            checkBox.setVisibility(View.GONE);
+        }
 
 
         if (videoGame != null) {
@@ -119,7 +133,8 @@ public class VideoGameFragment extends Fragment {
                         placeholder(R.drawable.ic_baseline_cloud_download_24).into(imageView);
             }
             textView.setText(videoGame.getName());
-
+            ratingBar.setRating(videoGame.getRating());
+            released.setText(videoGame.getReleased());
             db.document("users" + "/" + firebaseAuth.getCurrentUser().getUid() + "/preferiti" + "/" + videoGame.getName())
                     .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
@@ -147,6 +162,40 @@ public class VideoGameFragment extends Fragment {
                 public void onClick(View view) {
                     anim = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_bottom);
                     button.startAnimation(anim);
+                    anim.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            button.setVisibility(View.GONE);
+                            anim = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_up);
+                            rimuovi.startAnimation(anim);
+                            anim.setAnimationListener(new Animation.AnimationListener() {
+                                @Override
+                                public void onAnimationStart(Animation animation) {
+                                    rimuovi.setVisibility(View.VISIBLE);
+                                }
+
+                                @Override
+                                public void onAnimationEnd(Animation animation) {
+
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animation animation) {
+
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
                     DocumentReference documentReference = db.collection("users").document(firebaseAuth.getCurrentUser().getUid()).collection("raccolta").document(videoGame.getName());
 
                     Map<String, Object> user = new HashMap<>();
@@ -155,6 +204,34 @@ public class VideoGameFragment extends Fragment {
                     documentReference.set(user);
                     button.setVisibility(View.GONE);
 
+                }
+            });
+
+            rimuovi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    anim = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_bottom);
+                    rimuovi.startAnimation(anim);
+                    anim.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            rimuovi.setVisibility(View.GONE);
+                            anim = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_up);
+                            button.startAnimation(anim);
+                            button.setVisibility(View.VISIBLE);
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+                    db.collection("users").document(firebaseAuth.getCurrentUser().getUid()).collection("raccolta").document(videoGame.getName()).delete();
                 }
             });
 
@@ -238,14 +315,19 @@ public class VideoGameFragment extends Fragment {
 
                             List<DocumentSnapshot> documentSnapshots = queryDocumentSnapshots.getDocuments();
                             Log.d("raccolta",documentSnapshots.toString());
-                            progressBar.setVisibility(View.GONE);
-                            //button.setVisibility(view.INVISIBLE);
+                            if(!firebaseUser.isAnonymous()){
+                                progressBar.setVisibility(View.GONE);
+                                rimuovi.setVisibility(View.VISIBLE);
+                            }
+
                             for(DocumentSnapshot documentSnapshot: documentSnapshots){
                                 Log.d("raccolta", Objects.requireNonNull(documentSnapshot.getData()).toString());
                             }
                         }else{
-                            button.setVisibility(View.VISIBLE);
-                            progressBar.setVisibility(View.GONE);
+                            if(!firebaseUser.isAnonymous()){
+                                progressBar.setVisibility(View.GONE);
+                                button.setVisibility(View.VISIBLE);
+                            }
                         }
 
                     }

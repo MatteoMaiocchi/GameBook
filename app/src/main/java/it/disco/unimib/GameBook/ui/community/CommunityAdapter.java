@@ -13,18 +13,26 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import it.disco.unimib.GameBook.R;
+import it.disco.unimib.GameBook.ui.esplora.NuoviArriviAdapter;
 
 public class CommunityAdapter extends FirestoreRecyclerAdapter<User, CommunityAdapter.CommunityHolder> {
 
+    private OnItemClickListener onItemClickListener;
 
-    public CommunityAdapter(@NonNull FirestoreRecyclerOptions<User> options) {
-        super(options);
+    public interface OnItemClickListener {
+        void onItemClick(User user);
     }
+
+    public CommunityAdapter(@NonNull FirestoreRecyclerOptions<User> options, OnItemClickListener onItemClickListener) {
+        super(options);
+        this.onItemClickListener = onItemClickListener;
+    }
+
 
     //associa il dato alla view
     @Override
     protected void onBindViewHolder(@NonNull CommunityHolder holder, int position, @NonNull User model) {
-        holder.username.setText(model.getUsername());
+        holder.bind(model);
     }
 
     //rappresenta la view che verrà popolata con un elemento
@@ -44,6 +52,18 @@ public class CommunityAdapter extends FirestoreRecyclerAdapter<User, CommunityAd
         public CommunityHolder(@NonNull View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.Email);
+        }
+
+        public void bind(User user) {
+            if(user != null){
+                username.setText(user.getUsername());
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onItemClickListener.onItemClick(user);
+                    }
+                });
+            }
         }
     }
 }

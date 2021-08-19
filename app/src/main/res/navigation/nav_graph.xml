@@ -9,7 +9,12 @@
         android:id="@+id/CommunityFragment"
         android:name="it.disco.unimib.GameBook.ui.community.CommunityFragment"
         android:label=""
-        tools:layout="@layout/fragment_community" />
+        tools:layout="@layout/fragment_community" >
+        <action
+            android:id="@+id/action_CommunityFragment_to_ProfiloFragment"
+            app:destination="@id/ProfiloFragment" />
+
+    </fragment>
     <fragment
         android:id="@+id/EsploraFragment"
         android:name="it.disco.unimib.GameBook.ui.esplora.EsploraFragment"
@@ -39,6 +44,9 @@
         <action
             android:id="@+id/action_ProfiloFragment_to_raccoltaFragment"
             app:destination="@id/raccoltaFragment" />
+        <argument
+            android:name="user"
+            app:argType="it.disco.unimib.GameBook.ui.community.User" />
     </fragment>
     <activity
         android:id="@+id/activityLogin"

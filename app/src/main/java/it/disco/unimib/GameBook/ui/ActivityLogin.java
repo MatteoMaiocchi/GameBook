@@ -256,6 +256,7 @@ public class ActivityLogin extends AppCompatActivity {
                             user.put("email", firebaseAuth.getCurrentUser().getEmail());
                             user.put("foto", firebaseAuth.getCurrentUser().getPhotoUrl().toString());
                             user.put("username", username);
+                            user.put("id", firebaseAuth.getCurrentUser().getUid());
                             documentReference.set(user);
 
 

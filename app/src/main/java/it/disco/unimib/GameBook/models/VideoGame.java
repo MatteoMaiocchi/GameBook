@@ -133,16 +133,21 @@ public class VideoGame implements Parcelable {
     private String background_image;
     @SerializedName(value = "rating")
     @Expose
-    private double rating;
+    private float rating;
+
+    @SerializedName(value = "released")
+    @Expose
+    private String released;
     @SerializedName(value = "tba")
     @Expose
     private boolean tba;
 
-    public VideoGame(Integer id, String name, String background_image, double rating, boolean tba) {
+    public VideoGame(Integer id, String name, String background_image, float rating, String released, boolean tba) {
         this.id = id;
         this.name = name;
         this.background_image = background_image;
         this.rating = rating;
+        this.released = released;
         this.tba = tba;
     }
 
@@ -172,11 +177,11 @@ public class VideoGame implements Parcelable {
         this.background_image = background_image;
     }
 
-    public double getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 
@@ -195,6 +200,7 @@ public class VideoGame implements Parcelable {
                 ", name='" + name + '\'' +
                 ", background_image='" + background_image + '\'' +
                 ", rating=" + rating +
+                ", released=" + released +
                 ", tba=" + tba +
                 '}';
     }
@@ -211,13 +217,15 @@ public class VideoGame implements Parcelable {
         dest.writeString(this.name);
         dest.writeString(this.background_image);
         dest.writeDouble(this.rating);
+        dest.writeString(this.released);
 
     }
     public void readFromParcel(Parcel source){
         this.id = source.readInt();
         this.name = source.readString();
         this.background_image = source.readString();
-        this.rating = source.readDouble();
+        this.rating = source.readFloat();
+        this.released = source.readString();
     }
 
     protected VideoGame(Parcel in){
@@ -225,7 +233,8 @@ public class VideoGame implements Parcelable {
         this.id = in.readInt();
         this.name = in.readString();
         this.background_image = in.readString();
-        this.rating = in.readDouble();
+        this.rating = in.readFloat();
+        this.released = in.readString();
     }
 
     public static final Parcelable.Creator<VideoGame> CREATOR = new Parcelable.Creator<VideoGame>(){
@@ -241,6 +250,14 @@ public class VideoGame implements Parcelable {
         }
     };
 
+
+    public String getReleased() {
+        return released;
+    }
+
+    public void setReleased(String released) {
+        this.released = released;
+    }
 }
 
 
