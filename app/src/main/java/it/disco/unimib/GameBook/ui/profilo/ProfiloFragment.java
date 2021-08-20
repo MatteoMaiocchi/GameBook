@@ -151,9 +151,16 @@ public class ProfiloFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        ProfiloFragmentDirections.ActionProfiloFragmentToRaccoltaFragment actionProfiloFragmentToRaccoltaFragment =
-                                ProfiloFragmentDirections.actionProfiloFragmentToRaccoltaFragment(user);
-                        Navigation.findNavController(view).navigate(actionProfiloFragmentToRaccoltaFragment);
+                        if(user != null){
+                            ProfiloFragmentDirections.ActionProfiloFragmentToRaccoltaFragment actionProfiloFragmentToRaccoltaFragment =
+                                    ProfiloFragmentDirections.actionProfiloFragmentToRaccoltaFragment(user);
+                            Navigation.findNavController(view).navigate(actionProfiloFragmentToRaccoltaFragment);
+                        }else{
+                            NavController navController = NavHostFragment.findNavController(profiloFragment);
+                            navController.navigate(
+                                    R.id.action_ProfiloFragment_to_raccoltaFragment);
+                        }
+
                     }
                 },400);
 
@@ -168,9 +175,16 @@ public class ProfiloFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        ProfiloFragmentDirections.ActionProfiloFragmentToPreferitiFragment actionProfiloFragmentToPreferitiFragment =
-                                ProfiloFragmentDirections.actionProfiloFragmentToPreferitiFragment(user);
-                        Navigation.findNavController(view).navigate(actionProfiloFragmentToPreferitiFragment);
+                        if(user != null){
+                            ProfiloFragmentDirections.ActionProfiloFragmentToPreferitiFragment actionProfiloFragmentToPreferitiFragment =
+                                    ProfiloFragmentDirections.actionProfiloFragmentToPreferitiFragment(user);
+                            Navigation.findNavController(view).navigate(actionProfiloFragmentToPreferitiFragment);
+                        }else{
+                            NavController navController = NavHostFragment.findNavController(profiloFragment);
+                            navController.navigate(
+                                    R.id.action_ProfiloFragment_to_preferitiFragment);
+                        }
+
                     }
                 },400);
 
@@ -217,8 +231,8 @@ public class ProfiloFragment extends Fragment {
                         DocumentSnapshot documentSnapshot = task.getResult();
                         if(documentSnapshot != null && documentSnapshot.exists()){
                             String username = documentSnapshot.getString("username");
-                            String newValue = preferences.getString(Constants.USERNAME, username);
-                            textView.setText(newValue);
+                            //String newValue = preferences.getString(Constants.USERNAME, username);
+                            textView.setText(username);
                             String photo = documentSnapshot.getString("foto");
                             if (photo != null){
                                 getPhotoUrl(photo);
