@@ -57,6 +57,7 @@ import hari.bounceview.BounceView;
 import it.disco.unimib.GameBook.R;
 import it.disco.unimib.GameBook.models.VideoGame;
 import it.disco.unimib.GameBook.ui.community.CommunityFragment;
+import it.disco.unimib.GameBook.ui.community.CommunityFragmentDirections;
 import it.disco.unimib.GameBook.ui.community.User;
 import it.disco.unimib.GameBook.utils.Constants;
 
@@ -150,9 +151,9 @@ public class ProfiloFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        NavController navController = NavHostFragment.findNavController(profiloFragment);
-                        navController.navigate(
-                                R.id.action_ProfiloFragment_to_raccoltaFragment);
+                        ProfiloFragmentDirections.ActionProfiloFragmentToRaccoltaFragment actionProfiloFragmentToRaccoltaFragment =
+                                ProfiloFragmentDirections.actionProfiloFragmentToRaccoltaFragment(user);
+                        Navigation.findNavController(view).navigate(actionProfiloFragmentToRaccoltaFragment);
                     }
                 },400);
 
@@ -167,9 +168,9 @@ public class ProfiloFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        NavController navController = NavHostFragment.findNavController(profiloFragment);
-                        navController.navigate(
-                                R.id.action_ProfiloFragment_to_preferitiFragment);
+                        ProfiloFragmentDirections.ActionProfiloFragmentToPreferitiFragment actionProfiloFragmentToPreferitiFragment =
+                                ProfiloFragmentDirections.actionProfiloFragmentToPreferitiFragment(user);
+                        Navigation.findNavController(view).navigate(actionProfiloFragmentToPreferitiFragment);
                     }
                 },400);
 
@@ -226,27 +227,28 @@ public class ProfiloFragment extends Fragment {
                     }
                 }
             });
-        }
+        }else {
 
-        db.document("users" + "/" + Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid())
-                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()) {
-                    DocumentSnapshot documentSnapshot = task.getResult();
-                    if(documentSnapshot != null && documentSnapshot.exists()){
-                        String username = documentSnapshot.getString("username");
-                        String newValue = preferences.getString(Constants.USERNAME, username);
-                        textView.setText(newValue);
-                        String photo = documentSnapshot.getString("foto");
-                        if (photo != null){
-                            getPhotoUrl(photo);
+            db.document("users" + "/" + Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid())
+                    .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if (documentSnapshot != null && documentSnapshot.exists()) {
+                            String username = documentSnapshot.getString("username");
+                            String newValue = preferences.getString(Constants.USERNAME, username);
+                            textView.setText(newValue);
+                            String photo = documentSnapshot.getString("foto");
+                            if (photo != null) {
+                                getPhotoUrl(photo);
+                            }
+
                         }
-
                     }
                 }
-            }
-        });
+            });
+        }
 
     }
     private void getPhotoUrl(String url){

@@ -137,25 +137,25 @@ public class VideoGameFragment extends Fragment {
             released.setText(videoGame.getReleased());
             db.document("users" + "/" + firebaseAuth.getCurrentUser().getUid() + "/preferiti" + "/" + videoGame.getName())
                     .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if(task.isSuccessful()) {
-                                DocumentSnapshot documentSnapshot = task.getResult();
-                                if(documentSnapshot.exists() && documentSnapshot != null){
-                                    if(documentSnapshot.getBoolean("tba") == null){
-                                        checkBox.setChecked(false);
-                                    }else {
-                                        boolean tba = documentSnapshot.getBoolean("tba");
-                                        if (tba) {
-                                            checkBox.setChecked(true);
-                                        } else {
-                                            checkBox.setChecked(false);
-                                        }
-                                    }
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if(task.isSuccessful()) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if(documentSnapshot.exists() && documentSnapshot != null){
+                            if(documentSnapshot.getBoolean("tba") == null){
+                                checkBox.setChecked(false);
+                            }else {
+                                boolean tba = documentSnapshot.getBoolean("tba");
+                                if (tba) {
+                                    checkBox.setChecked(true);
+                                } else {
+                                    checkBox.setChecked(false);
                                 }
                             }
                         }
-                    });
+                    }
+                }
+            });
             //button.setVisibility(view.INVISIBLE);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -263,7 +263,7 @@ public class VideoGameFragment extends Fragment {
 
 
 
-        }
+    }
 
 
     /*

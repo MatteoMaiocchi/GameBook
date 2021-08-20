@@ -34,6 +34,7 @@ public class PreferitiFragment extends Fragment {
     FirebaseFirestore firebaseFirestore;
     PreferitiAdapter preferitiAdapter;
 
+    User user;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,11 +52,18 @@ public class PreferitiFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        if(getArguments().isEmpty()){
+            user = null;
+        }else{
+            user = ProfiloFragmentArgs.fromBundle(getArguments()).getUser();
+        }
+
+
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
         recyclerView = view.findViewById(R.id.recyclerview_preferiti);
-
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -65,8 +73,12 @@ public class PreferitiFragment extends Fragment {
 
         if(firebaseUser != null) {
 
-            Query query = firebaseFirestore.collection("users").document(firebaseAuth.getCurrentUser().getUid()).collection("preferiti");
-
+            Query query = null;
+            if(user != null){
+                query = firebaseFirestore.collection("users").document(user.getId()).collection("preferiti");
+            }else {
+                query = firebaseFirestore.collection("users").document(firebaseAuth.getCurrentUser().getUid()).collection("preferiti");
+            }
 
             FirestoreRecyclerOptions<VideoGame> options = new FirestoreRecyclerOptions.Builder<VideoGame>()
                     .setQuery(query, VideoGame.class)

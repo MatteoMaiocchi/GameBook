@@ -71,6 +71,9 @@
         <action
             android:id="@+id/action_preferitiFragment_to_videoGameFragment"
             app:destination="@id/videoGameFragment" />
+        <argument
+            android:name="user"
+            app:argType="it.disco.unimib.GameBook.ui.community.User" />
     </fragment>
     <activity
         android:id="@+id/settingsActivity"
@@ -87,5 +90,8 @@
         <action
             android:id="@+id/action_raccoltaFragment_to_videoGameFragment"
             app:destination="@id/videoGameFragment" />
+        <argument
+            android:name="user"
+            app:argType="it.disco.unimib.GameBook.ui.community.User" />
     </fragment>
 </navigation>

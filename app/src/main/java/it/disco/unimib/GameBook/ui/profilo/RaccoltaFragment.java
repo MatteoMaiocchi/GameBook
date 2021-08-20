@@ -9,6 +9,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.Query;
 
 import it.disco.unimib.GameBook.R;
 import it.disco.unimib.GameBook.models.VideoGame;
+import it.disco.unimib.GameBook.ui.community.User;
 
 
 public class RaccoltaFragment extends Fragment {
@@ -30,6 +32,8 @@ public class RaccoltaFragment extends Fragment {
     RecyclerView recyclerView;
     FirebaseFirestore firebaseFirestore;
     PreferitiAdapter adapter;
+
+    User user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +47,12 @@ public class RaccoltaFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        if(getArguments().isEmpty()){
+            user = null;
+        }else{
+            user = ProfiloFragmentArgs.fromBundle(getArguments()).getUser();
+        }
+
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         recyclerView = view.findViewById(R.id.recyclerview_raccolta);
@@ -54,9 +64,12 @@ public class RaccoltaFragment extends Fragment {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
         if(firebaseUser != null) {
-
-            Query query = firebaseFirestore.collection("users").document(firebaseAuth.getCurrentUser().getUid()).collection("raccolta");
-
+            Query query = null;
+            if(user != null){
+                query = firebaseFirestore.collection("users").document(user.getId()).collection("raccolta");
+            }else {
+                query = firebaseFirestore.collection("users").document(firebaseAuth.getCurrentUser().getUid()).collection("raccolta");
+            }
 
             FirestoreRecyclerOptions<VideoGame> options = new FirestoreRecyclerOptions.Builder<VideoGame>()
                     .setQuery(query, VideoGame.class)

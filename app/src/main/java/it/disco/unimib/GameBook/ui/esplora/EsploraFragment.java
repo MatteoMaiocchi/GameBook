@@ -83,8 +83,7 @@ public class EsploraFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBar);
         recyclerView = view.findViewById(R.id.prova);
         recyclerView.setHasFixedSize(true);
-        //LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        Log.d("momo", "bello");
+
         nuoviArriviViewAdapter = new NuoviArriviAdapter(videoGamesApi, new NuoviArriviAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(VideoGame videoGame) {
@@ -93,7 +92,7 @@ public class EsploraFragment extends Fragment {
                 Navigation.findNavController(view).navigate(action);
             }
         });
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(nuoviArriviViewAdapter);
 
         videogameViewModel = new ViewModelProvider(this, new VideoGameViewModelFactory(
