@@ -3,6 +3,7 @@ package it.disco.unimib.GameBook.viewModel;
 
 import android.app.Application;
 import android.os.IInterface;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;

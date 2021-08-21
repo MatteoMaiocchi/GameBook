@@ -29,14 +29,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.disco.unimib.GameBook.models.Response;
+import it.disco.unimib.GameBook.models.ResponseTopRating;
 import it.disco.unimib.GameBook.models.VideoGame;
 import it.disco.unimib.GameBook.repository.IVideoGameResponseCallback;
 import it.disco.unimib.GameBook.repository.IVideogameRepositoryWithLiveData;
+import it.disco.unimib.GameBook.repository.IVideogameTopRatingRepositoryWithLiveData;
 import it.disco.unimib.GameBook.repository.ResponseCallback;
 import it.disco.unimib.GameBook.R;
 import it.disco.unimib.GameBook.repository.VideoGameResponseCallback;
 import it.disco.unimib.GameBook.repository.VideogameRepositoryWithLiveData;
+import it.disco.unimib.GameBook.repository.VideogameTopRatingRepositoryWithLiveData;
+import it.disco.unimib.GameBook.viewModel.VideoGameTopRatingViewModelFactory;
 import it.disco.unimib.GameBook.viewModel.VideoGameViewModelFactory;
+import it.disco.unimib.GameBook.viewModel.VideogameTopRatingViewModel;
 import it.disco.unimib.GameBook.viewModel.VideogameViewModel;
 
 public class EsploraFragment extends Fragment {
@@ -45,15 +50,18 @@ public class EsploraFragment extends Fragment {
 
     private IVideoGameResponseCallback videogameRepository;
     private NuoviArriviAdapter nuoviArriviViewAdapter = null;
+    private TopRatingAdapter topRatingAdapter = null;
     private IVideogameRepositoryWithLiveData iVideogameRepositoryWithLiveData;
+    private IVideogameTopRatingRepositoryWithLiveData iVideogameTopRatingRepositoryWithLiveData;
     private VideogameViewModel videogameViewModel;
+    private VideogameTopRatingViewModel videogameViewModelTopRating;
 
     private boolean oK = false;
 
-    private List<VideoGame> videoGamesApi;
+    private List<VideoGame> videoGamesApi, videoGamesTopRating;
     private boolean ok;
 
-    RecyclerView recyclerView;
+    RecyclerView recyclerView, recyclerViewTopRating;
 
     private int page;
     private ProgressBar progressBar;
@@ -78,11 +86,15 @@ public class EsploraFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         iVideogameRepositoryWithLiveData = new VideogameRepositoryWithLiveData(requireActivity().getApplication());
+        iVideogameTopRatingRepositoryWithLiveData = new VideogameTopRatingRepositoryWithLiveData(requireActivity().getApplication());
 
         videoGamesApi = new ArrayList<>();
+        videoGamesTopRating = new ArrayList<>();
         progressBar = view.findViewById(R.id.progressBar);
         recyclerView = view.findViewById(R.id.prova);
         recyclerView.setHasFixedSize(true);
+        recyclerViewTopRating = view.findViewById(R.id.videoGamesTopRating);
+        recyclerViewTopRating.setHasFixedSize(true);
 
         nuoviArriviViewAdapter = new NuoviArriviAdapter(videoGamesApi, new NuoviArriviAdapter.OnItemClickListener() {
             @Override
@@ -95,8 +107,21 @@ public class EsploraFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(nuoviArriviViewAdapter);
 
+        topRatingAdapter = new TopRatingAdapter(videoGamesTopRating, new TopRatingAdapter.OnItemClickListener(){
+            @Override
+            public void onItemClick(VideoGame videoGame) {
+                Log.d(TAG, videoGame.toString());
+                EsploraFragmentDirections.ActionEsploraFragmentToVideoGameFragment action = EsploraFragmentDirections.actionEsploraFragmentToVideoGameFragment(videoGame);
+                Navigation.findNavController(view).navigate(action);
+            }
+        });
+        recyclerViewTopRating.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewTopRating.setAdapter(topRatingAdapter);
+
+
         videogameViewModel = new ViewModelProvider(this, new VideoGameViewModelFactory(
                 requireActivity().getApplication(), iVideogameRepositoryWithLiveData, "")).get(VideogameViewModel.class);
+
 
         final Observer<Response> observer = new Observer<Response>() {
             @Override
@@ -120,9 +145,65 @@ public class EsploraFragment extends Fragment {
                     }
                 }
             }
+
         };
 
         videogameViewModel.getResponseLiveData().observe(getViewLifecycleOwner(), observer);
+
+
+        videogameViewModelTopRating = new ViewModelProvider(this, new VideoGameTopRatingViewModelFactory(
+                requireActivity().getApplication(), iVideogameTopRatingRepositoryWithLiveData, "-rating")).get(VideogameTopRatingViewModel.class);
+
+        final Observer<ResponseTopRating> observer1 = new Observer<ResponseTopRating>() {
+            @Override
+            public void onChanged(ResponseTopRating responseTopRating) {
+                if (responseTopRating != null) {
+                    if (responseTopRating.getCount() != -1) {
+                        ok = true;
+                        videoGamesTopRating.addAll(responseTopRating.getVideoGameListTopRating());
+                        progressBar.setVisibility(View.GONE);
+                        Log.d("passo2: ", "" + 2);
+                        requireActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                topRatingAdapter.notifyDataSetChanged();
+                                progressBar.setVisibility(View.GONE);
+                            }
+                        });
+                    } else {
+                        updateUIForFailure("Error");
+                    }
+                }
+            }
+        };
+
+        videogameViewModelTopRating.getResponseLiveData().observe(getViewLifecycleOwner(), observer1);
+
+        /*final Observer<Response> observerTopRating = new Observer<Response>() {
+            @Override
+            public void onChanged(@Nullable final Response response) {
+                // Update the UI
+                if (response != null) {
+                    if (response.getCount() != -1) {
+                        ok = true;
+                        videoGamesTopRating.addAll(response.getVideoGameList());
+                        progressBar.setVisibility(View.GONE);
+                        Log.d("passo2: ", "" + 2);
+                        requireActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                topRatingAdapter.notifyDataSetChanged();
+                                progressBar.setVisibility(View.GONE);
+                            }
+                        });
+                    } else {
+                        updateUIForFailure("Error");
+                    }
+                }
+            }
+        };*/
+
+
 
         //videogameRepository.fetchVideoGame(page, stringa); //Stringa di ricerca
         //videogameRepository.fetchVideoGame(page, null); //Stringa di ricerca

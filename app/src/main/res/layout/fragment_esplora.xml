@@ -32,8 +32,6 @@
             android:layout_marginRight="363dp" />
 
 
-        <!-- PROVA -->
-
         <LinearLayout
             android:layout_marginTop="35dp"
             android:layout_width="match_parent"
@@ -67,8 +65,38 @@
 
         </LinearLayout>
 
-        <!-- FINE PROVA -->
+        <LinearLayout
+            android:layout_marginTop="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="0dp"
+                    android:text="Top Rating"
+                    android:textSize="25dp">
+
+                </TextView>
+
+            </RelativeLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/videoGamesTopRating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

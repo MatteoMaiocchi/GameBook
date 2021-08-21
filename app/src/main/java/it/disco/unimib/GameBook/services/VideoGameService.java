@@ -11,4 +11,10 @@ public interface VideoGameService {
     Call<Response> getGames(
                             @Query("search") String stringa,
                             @Query("key") String apiKey);
+    @GET("games")
+    Call<Response> getTopRating(
+            @Query("ordering") String stringa,
+            @Query("page_size") int pageSize,
+            @Query("key") String apiKey);
+
 }

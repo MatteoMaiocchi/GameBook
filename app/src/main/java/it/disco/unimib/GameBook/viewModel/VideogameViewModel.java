@@ -41,7 +41,7 @@ public class VideogameViewModel extends AndroidViewModel {
         super(application);
         this.mIVideogameRepositoryWithLiveData = iVideogameRepositoryWithLiveData;
         this.stringa = stringa;
-        Log.d("guarda1: ", stringa);
+        Log.d("guarda1", stringa);
     }
 
 

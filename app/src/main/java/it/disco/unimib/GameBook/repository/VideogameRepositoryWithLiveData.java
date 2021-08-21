@@ -34,30 +34,52 @@ public class VideogameRepositoryWithLiveData implements IVideogameRepositoryWith
 
     @Override
     public MutableLiveData<Response> fetchVideogames(String stringa) {
+        Call<Response> call;
         if (stringa.equals("-rating"))
         {
-
-        }
-        Call<Response> call = videoGameService.getGames(stringa,Constants.VIDEOGAME_API_KEY);
-
-        call.enqueue(new Callback<Response>() {
-            @Override
-            public void onResponse(@NonNull Call<Response> call, @NonNull retrofit2.Response<Response> response) {
-                if (response.body() != null && response.isSuccessful()) {
-                    Log.d("non sono ", "null");
-                    List<VideoGame> videoGameList = response.body().getVideoGameList();
-                    mResponseLiveData.postValue(response.body());
+            call = videoGameService.getTopRating(stringa,10, Constants.VIDEOGAME_API_KEY);
+            call.enqueue(new Callback<Response>() {
+                @Override
+                public void onResponse(@NonNull Call<Response> call, @NonNull retrofit2.Response<Response> response) {
+                    if (response.body() != null && response.isSuccessful()) {
+                        Log.d("non sono ", "null");
+                        //List<VideoGame> videoGameList = response.body().getVideoGameList();
+                        mResponseLiveData.postValue(response.body());
+                    }
+                    Log.d("code: ", ""+response.code());
                 }
-                Log.d("code: ", ""+response.code());
-            }
 
-            @Override
-            public void onFailure(@NonNull Call<Response> call, @NonNull Throwable t) {
-                mResponseLiveData.postValue(new Response(-1, null)); //in caso di errore, count a -1
-                Log.d("code: ", t.getMessage());
-            }
-        });
-        return mResponseLiveData;
+                @Override
+                public void onFailure(@NonNull Call<Response> call, @NonNull Throwable t) {
+                    mResponseLiveData.postValue(new Response(-1, null, null)); //in caso di errore, count a -1
+                    Log.d("code: ", t.getMessage());
+                }
+            });
+            return mResponseLiveData;
+        }else{
+            call = videoGameService.getGames(stringa,Constants.VIDEOGAME_API_KEY);
+            call.enqueue(new Callback<Response>() {
+                @Override
+                public void onResponse(@NonNull Call<Response> call, @NonNull retrofit2.Response<Response> response) {
+                    if (response.body() != null && response.isSuccessful()) {
+                        Log.d("non sono ", "null");
+                        //List<VideoGame> videoGameList = response.body().getVideoGameList();
+                        mResponseLiveData.postValue(response.body());
+                    }
+                    Log.d("code: ", ""+response.code());
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<Response> call, @NonNull Throwable t) {
+                    mResponseLiveData.postValue(new Response(-1, null, null)); //in caso di errore, count a -1
+                    Log.d("code: ", t.getMessage());
+                }
+            });
+            return mResponseLiveData;
+        }
+
+
+
     }
 
 }
