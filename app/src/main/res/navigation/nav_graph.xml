@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/CommunityFragment"
         android:name="it.disco.unimib.GameBook.ui.community.CommunityFragment"
-        android:label=""
-        tools:layout="@layout/fragment_community" >
+        android:label="Community"
+        tools:layout="@layout/fragment_community">
         <action
             android:id="@+id/action_CommunityFragment_to_ProfiloFragment"
             app:destination="@id/ProfiloFragment" />
@@ -18,8 +18,8 @@
     <fragment
         android:id="@+id/EsploraFragment"
         android:name="it.disco.unimib.GameBook.ui.esplora.EsploraFragment"
-        android:label=""
-        tools:layout="@layout/fragment_esplora" >
+        android:label="Esplora"
+        tools:layout="@layout/fragment_esplora">
         <action
             android:id="@+id/action_EsploraFragment_to_videoGameFragment"
             app:destination="@id/videoGameFragment" />
@@ -27,8 +27,8 @@
     <fragment
         android:id="@+id/ProfiloFragment"
         android:name="it.disco.unimib.GameBook.ui.profilo.ProfiloFragment"
-        android:label=""
-        tools:layout="@layout/fragment_profilo" >
+        android:label="Profilo"
+        tools:layout="@layout/fragment_profilo">
         <action
             android:id="@+id/action_ProfiloFragment_to_activityLogin"
             app:destination="@id/activityLogin" />
@@ -51,7 +51,7 @@
     <activity
         android:id="@+id/activityLogin"
         android:name="it.disco.unimib.GameBook.ui.ActivityLogin"
-        android:label="activity_main_login"
+        android:label="Login"
         tools:layout="@layout/activity_main_login" />
 
     <fragment
@@ -79,7 +79,7 @@
         android:id="@+id/settingsActivity"
         android:name="it.disco.unimib.GameBook.utils.SettingsActivity"
         android:label="Settings"
-        tools:layout="@layout/activity_settings" >
+        tools:layout="@layout/activity_settings">
 
     </activity>
     <fragment

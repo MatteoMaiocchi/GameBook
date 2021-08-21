@@ -249,7 +249,6 @@ public class VideoGameFragment extends Fragment {
                     Map<String, Object> user = new HashMap<>();
                     user.put("name", videoGame.getName());
                     user.put("background_image", videoGame.getBackground_image());
-                    user.put("tba", buttonView.isChecked());
                     documentReference.set(user);
                     choose = true;
 
