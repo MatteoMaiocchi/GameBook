@@ -162,7 +162,7 @@ public class VideoGame implements Parcelable {
     }
 
     public String getName() {
-        return name;
+        return name.replaceAll("/", "_");
     }
 
     public void setName(String name) {

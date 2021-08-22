@@ -213,7 +213,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         delete.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                ReAuthenticate();
+                delete();
                 return false;
             }
         });
@@ -424,7 +424,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         mDialog.show();
 
          */
-
+        Log.d(TAG, "bastardo delete");
 
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(requireContext())
                 //.setIcon(R.drawable.ic_baseline_delete_24)
@@ -436,21 +436,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 .setTextColor(requireActivity().getResources().getColor(R.color.background_tv))
                 .setMessage("Are you sure want to delete this account?")
                 .addButton("delete", -1, -1, CFAlertDialog.CFAlertActionStyle.NEGATIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
-                    firebaseUser.delete()
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        db.collection("users").document(Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid()).delete();
-                                        db.document("users" + "/" + Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid() + "preferiti").delete();
-                                        db.document("users" + "/" + Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid() + "raccolta").delete();
-                                        Log.d(TAG, "User account deleted.");
-                                        startActivity(new Intent(getActivity(), ActivityLogin.class));
-                                        requireActivity().finish();
-                                        //((MainActivity) requireActivity()).finish();
-                                    }
-                                }
-                            });
+                    ReAuthenticate();
                     dialog.dismiss();
                 })
                 .addButton("cancel", -1, -1, CFAlertDialog.CFAlertActionStyle.DEFAULT, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
@@ -734,7 +720,25 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             @Override
             public void onComplete(@NonNull @NotNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    delete();
+                    String uid = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
+                    db.document("users" + "/" + uid + "preferiti").delete();
+                    db.document("users" + "/" + uid + "raccolta").delete();
+                    db.collection("users").document(uid).delete();
+                    firebaseUser.delete()
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d(TAG, "User account deleted.");
+                                        startActivity(new Intent(getActivity(), ActivityLogin.class));
+                                        requireActivity().finish();
+                                        //((MainActivity) requireActivity()).finish();
+                                    }
+                                }
+                            });
+                } else
+                {
+                    Log.e("qwe", String.valueOf(task.getException()));
                 }
             }
         });

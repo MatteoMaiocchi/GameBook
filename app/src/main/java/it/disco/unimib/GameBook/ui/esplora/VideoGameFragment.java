@@ -135,22 +135,18 @@ public class VideoGameFragment extends Fragment {
             textView.setText(videoGame.getName());
             ratingBar.setRating(videoGame.getRating());
             released.setText(videoGame.getReleased());
-            db.document("users" + "/" + firebaseAuth.getCurrentUser().getUid() + "/preferiti" + "/" + videoGame.getName())
+            db.document("users" + "/" + Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid() + "/preferiti" + "/" + videoGame.getName())
                     .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if(task.isSuccessful()) {
                         DocumentSnapshot documentSnapshot = task.getResult();
-                        if(documentSnapshot.exists() && documentSnapshot != null){
+                        if(documentSnapshot != null && documentSnapshot.exists()){
                             if(documentSnapshot.getBoolean("tba") == null){
                                 checkBox.setChecked(false);
                             }else {
                                 boolean tba = documentSnapshot.getBoolean("tba");
-                                if (tba) {
-                                    checkBox.setChecked(true);
-                                } else {
-                                    checkBox.setChecked(false);
-                                }
+                                checkBox.setChecked(tba);
                             }
                         }
                     }
@@ -249,6 +245,7 @@ public class VideoGameFragment extends Fragment {
                     Map<String, Object> user = new HashMap<>();
                     user.put("name", videoGame.getName());
                     user.put("background_image", videoGame.getBackground_image());
+                    user.put("tba", true);
                     documentReference.set(user);
                     choose = true;
 
