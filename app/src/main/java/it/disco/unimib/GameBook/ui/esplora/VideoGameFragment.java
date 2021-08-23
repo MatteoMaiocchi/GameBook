@@ -112,10 +112,10 @@ public class VideoGameFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressbar);
 
         if(firebaseUser.isAnonymous()){
-            button.setVisibility(View.GONE);
-            rimuovi.setVisibility(View.GONE);
-            progressBar.setVisibility(View.GONE);
-            checkBox.setVisibility(View.GONE);
+            button.setVisibility(View.INVISIBLE);
+            rimuovi.setVisibility(View.INVISIBLE);
+            progressBar.setVisibility(View.INVISIBLE);
+            checkBox.setVisibility(View.INVISIBLE);
         }
 
 
@@ -197,6 +197,8 @@ public class VideoGameFragment extends Fragment {
                     Map<String, Object> user = new HashMap<>();
                     user.put("name", videoGame.getName());
                     user.put("background_image", videoGame.getBackground_image());
+                    user.put("rating",videoGame.getRating());
+                    user.put("released",videoGame.getReleased());
                     documentReference.set(user);
                     button.setVisibility(View.GONE);
 

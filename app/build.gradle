@@ -98,6 +98,8 @@ dependencies {
     //implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
     implementation 'com.shreyaspatil:MaterialDialog:1.0.0'
 
+    implementation 'org.imaginativeworld.oopsnointernet:oopsnointernet:2.0.0'
+
 
 
 
