@@ -172,10 +172,12 @@ public class VideoGameFragment extends Fragment {
                             button.setVisibility(View.GONE);
                             anim = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_up);
                             rimuovi.startAnimation(anim);
+                            rimuovi.setVisibility(View.VISIBLE);
+                            /*
                             anim.setAnimationListener(new Animation.AnimationListener() {
                                 @Override
                                 public void onAnimationStart(Animation animation) {
-                                    rimuovi.setVisibility(View.VISIBLE);
+
                                 }
 
                                 @Override
@@ -188,6 +190,8 @@ public class VideoGameFragment extends Fragment {
 
                                 }
                             });
+
+                             */
                         }
 
                         @Override

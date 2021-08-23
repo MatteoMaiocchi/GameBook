@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
-        android:title="Generale">
+        android:title="Generale"
+        app:iconSpaceReserved="false">
 
         <ListPreference
             android:key="night"
@@ -17,13 +18,13 @@
             app:useSimpleSummaryProvider="true">
 
         </ListPreference>
-        <SwitchPreferenceCompat
+        <!--SwitchPreferenceCompat
             android:key="prova"
             android:title="prova"
             android:summary="android"
             android:icon="@drawable/ic_baseline_nights_stay_24"
             android:defaultValue="false">
-        </SwitchPreferenceCompat>
+        </SwitchPreferenceCompat-->
         <Preference
             android:key="logout"
             android:title="Log Out"

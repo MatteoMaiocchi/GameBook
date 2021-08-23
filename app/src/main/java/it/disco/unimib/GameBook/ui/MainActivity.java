@@ -18,7 +18,8 @@ import android.view.View;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 
-
+import org.imaginativeworld.oopsnointernet.dialogs.pendulum.DialogPropertiesPendulum;
+import org.imaginativeworld.oopsnointernet.dialogs.pendulum.NoInternetDialogPendulum;
 
 import it.disco.unimib.GameBook.R;
 import it.disco.unimib.GameBook.databinding.ActivityMainBinding;
@@ -135,6 +136,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        NoInternetDialogPendulum.Builder builder = new NoInternetDialogPendulum.Builder(
+                this,
+                getLifecycle()
+        );
+        DialogPropertiesPendulum properties = builder.getDialogProperties();
+        properties.setCancelable(false);
+        properties.setNoInternetConnectionTitle("Connessione Internet assente");
+        properties.setNoInternetConnectionMessage("Verifica la connessione e riprova");
+        properties.setShowInternetOnButtons(true);
+        properties.setPleaseTurnOnText("Attiva");
+        properties.setWifiOnButtonText("Wifi");
+        properties.setMobileDataOnButtonText("Dati mobili");
+        properties.setOnAirplaneModeTitle("Connessione Internet assente");
+        properties.setOnAirplaneModeMessage("Modalità aereo attiva");
+        properties.setPleaseTurnOffText("Disattiva");
+        properties.setAirplaneModeOffButtonText("Modalità aereo");
+        properties.setShowAirplaneModeOffButtons(true);
+        builder.build();
     }
 }
