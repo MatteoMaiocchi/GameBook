@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.10885416666666667" />
+        <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.2703125" />
+        <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/drawable/ic_baseline_check_circle_outline_24.xml" value="0.2703125" />
+        <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.2703125" />
         <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/drawable/sl_favourite_24dp.xml" value="0.2703125" />
         <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/layout/fragment_esplora.xml" value="0.17119565217391305" />
         <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/layout/fragment_video_game.xml" value="0.1852355072463768" />
@@ -11,6 +14,8 @@
         <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/layout/list_nuovi_arrivi.xml" value="0.20244565217391305" />
         <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/layout/list_videogame.xml" value="0.1911231884057971" />
         <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/layout/list_videogame_preferiti.xml" value="0.1911231884057971" />
+        <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/menu/back.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/menu/bottom_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/xml/preferences.xml" value="0.264" />
         <entry key="app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.21614583333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
@@ -22,7 +27,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

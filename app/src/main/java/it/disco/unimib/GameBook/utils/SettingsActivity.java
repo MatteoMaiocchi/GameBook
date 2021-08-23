@@ -1,5 +1,6 @@
 package it.disco.unimib.GameBook.utils;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
@@ -7,8 +8,7 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-
+import android.view.MenuItem;
 
 
 import it.disco.unimib.GameBook.R;
@@ -20,6 +20,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if(savedInstanceState == null){
             SettingsFragment fragment = new SettingsFragment();
@@ -45,4 +46,14 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         startActivity(new Intent(this, MainActivity.class));
         overridePendingTransition(R.animator.animation, R.animator.animation_out);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home)
+        {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

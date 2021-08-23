@@ -579,6 +579,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void alertLogout(){
+        /*
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext());
         builder.setTitle("Logout")
                 .setMessage("Sei sicuro di volerti disconnettere?")
@@ -605,9 +606,28 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         builder.create();
         builder.show();
 
+         */
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(requireContext())
+                .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
+                .setDialogBackgroundColor(requireActivity().getResources().getColor(R.color.background))
+                .setTitle("Log Out")
+                .setTextGravity(Gravity.CENTER)
+                .setTextColor(requireActivity().getResources().getColor(R.color.background_tv))
+                .setMessage("Sei sicuro di volerti disconnettere?")
+                .addButton("Ok", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
+
+                    logout();
+                })
+                .addButton("Annulla", -1, -1, CFAlertDialog.CFAlertActionStyle.DEFAULT, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
+
+                    dialog.dismiss();
+                });
+
+        builder.show();
+
     }
     private void alertLogin()
-    {
+    {   /*
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext());
         builder.setTitle("LogIn")
                 .setMessage("Vuoi connetterti per salvare i tuoi giochi?")
@@ -632,6 +652,22 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                     }
                 });
         builder.create();
+        */
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(requireContext())
+                .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
+                .setDialogBackgroundColor(requireActivity().getResources().getColor(R.color.background))
+                .setTitle("Log In")
+                .setTextGravity(Gravity.CENTER)
+                .setTextColor(requireActivity().getResources().getColor(R.color.background_tv))
+                .setMessage("Vuoi connetterti per salvare i tuoi giochi?")
+                .addButton("Ok", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
+
+                    logout();
+                })
+                .addButton("Annulla", -1, -1, CFAlertDialog.CFAlertActionStyle.DEFAULT, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
+
+                    dialog.dismiss();
+                });
         builder.show();
     }
     /*
