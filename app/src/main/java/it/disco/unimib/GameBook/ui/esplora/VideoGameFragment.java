@@ -1,5 +1,7 @@
 package it.disco.unimib.GameBook.ui.esplora;
 
+import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.media.Rating;
 import android.os.Bundle;
 
@@ -91,6 +93,7 @@ public class VideoGameFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_video_game, container, false);
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Log.d("debug", "2");
@@ -247,6 +250,8 @@ public class VideoGameFragment extends Fragment {
                     Map<String, Object> user = new HashMap<>();
                     user.put("name", videoGame.getName());
                     user.put("background_image", videoGame.getBackground_image());
+                    user.put("rating",videoGame.getRating());
+                    user.put("released",videoGame.getReleased());
                     user.put("tba", true);
                     documentReference.set(user);
                     choose = true;

@@ -12,4 +12,5 @@
     <color name="background">#D6D5D5</color>
     <color name="background_tv">#232323</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="bianco">#FFFFFF</color>
 </resources>

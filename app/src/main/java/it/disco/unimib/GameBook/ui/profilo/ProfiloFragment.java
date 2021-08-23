@@ -105,6 +105,7 @@ public class ProfiloFragment extends Fragment {
         }
 
 
+
         imageView = view.findViewById(R.id.imageViewProfilo);
         //ImageButton button_preferiti = view.findViewById(R.id.button_preferiti);
         textView = view.findViewById(R.id.username);
@@ -126,6 +127,11 @@ public class ProfiloFragment extends Fragment {
 
         setUpRecyclerView1(view, user);
         setUpRecyclerView2(view, user);
+
+        if (firebaseUser.isAnonymous()){
+            imageView.setImageDrawable(getResources().getDrawable(R.drawable.incognito));
+            textView.setText("Ospite");
+        }
 
         //}
 
