@@ -154,7 +154,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         Preference log_out = findPreference(Constants.LOG_OUT);
         assert log_out != null;
         if(firebaseUser.isAnonymous()){
-            Log.d(TAG, "porca boia");
             log_out.setTitle("Log In");
             log_out.setIcon(R.drawable.ic_baseline_login_24);
 
@@ -193,7 +192,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                             @Override
                             public boolean onPreferenceChange(Preference preference, Object newValue) {
                                 String name = (String) newValue;
-                                Log.d(TAG,  "USER" + newValue);
+                                //Log.d(TAG,  "USER" + newValue);
 
                                 readUser(name, editTextPreference);
 
@@ -264,9 +263,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         Uri outputFileUri = null;
         File getImage = requireContext().getExternalCacheDir();
         if (getImage != null) {
-            Log.d(TAG, "PORCA BOIA");
             outputFileUri = Uri.fromFile(new File(getImage.getPath(), "pickImageResult.jpeg"));
-            Log.d(TAG, "PORCA BOIA" + outputFileUri);
         }
         return outputFileUri;
     }
@@ -324,7 +321,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.d(TAG, "pirla998 " + requestCode + " " + requestCode);
        switch (requestCode){
            case PERMISSION_FILE:{
                if(!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)){
@@ -333,7 +329,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                        if(grantResults[i] == PackageManager.PERMISSION_DENIED){
                            boolean showRationale = shouldShowRequestPermissionRationale(permission); //checkbox non chiedermelo più
                            if(!showRationale){
-                               Log.d(TAG, "negato");
+                               //Log.d(TAG, "negato");
                                break;
                            }
                        }
@@ -350,21 +346,18 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "pirla32 " + requestCode + " " + requestCode);
         if (resultCode == RESULT_OK)
         {
             if(requestCode == ACCESS_CAMERA || requestCode == ACCESS_FILE){
-                Log.d(TAG, "pirla33 " + requestCode + " " + requestCode);
                 //Uri fileUri = data.getData();
                 Uri imageUri = getPickImageResultUri(data);
                 // intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                Log.d(TAG, "pirla50 " + requestCode + " " + requestCode);
                 CropImage.activity(imageUri)
                         .setGuidelines(CropImageView.Guidelines.ON)
                         .setCropShape(CropImageView.CropShape.OVAL)
-                        .setActivityTitle("Crop Image")
+                        .setActivityTitle("Ritaglia immagine")
                         .setFixAspectRatio(true)
-                        .setCropMenuCropButtonTitle("Done")
+                        .setCropMenuCropButtonTitle("Fatto")
                         .start(requireContext(), this);
 
             }
@@ -372,15 +365,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         }
 
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            Log.d(TAG, "pirla35");
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
                     uploadImage(resultUri);
-                Log.d(TAG, "pirla33");
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
-                Log.d(TAG, "pirla34");
             }
         }
     }
@@ -424,22 +414,21 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         mDialog.show();
 
          */
-        Log.d(TAG, "bastardo delete");
 
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(requireContext())
                 //.setIcon(R.drawable.ic_baseline_delete_24)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
                 .setCancelable(false)
                 .setDialogBackgroundColor(requireActivity().getResources().getColor(R.color.background))
-                .setTitle("Delete?")
+                .setTitle("Eliminare?")
                 .setTextGravity(Gravity.CENTER)
                 .setTextColor(requireActivity().getResources().getColor(R.color.background_tv))
-                .setMessage("Are you sure want to delete this account?")
-                .addButton("delete", -1, -1, CFAlertDialog.CFAlertActionStyle.NEGATIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
+                .setMessage("Sei sicuro di voler eliminare l'account?")
+                .addButton("Elimina", -1, -1, CFAlertDialog.CFAlertActionStyle.NEGATIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
                     ReAuthenticate();
                     dialog.dismiss();
                 })
-                .addButton("cancel", -1, -1, CFAlertDialog.CFAlertActionStyle.DEFAULT, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
+                .addButton("Annulla", -1, -1, CFAlertDialog.CFAlertActionStyle.DEFAULT, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
 
                     dialog.dismiss();
                 });
@@ -533,7 +522,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 .setHeaderView(R.layout.negative)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
                 .setDialogBackgroundColor(requireActivity().getResources().getColor(R.color.background))
-                .setTitle("Error")
+                .setTitle("Errore")
                 .setTextGravity(Gravity.CENTER)
                 .setTextColor(requireActivity().getResources().getColor(R.color.background_tv))
                 .setMessage("Username già utilizzato, riprovare con un altro")
@@ -546,11 +535,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                     .setHeaderView(R.layout.positive)
                     .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
                     .setDialogBackgroundColor(requireActivity().getResources().getColor(R.color.background))
-                    .setTitle("Success")
+                    .setTitle("Successo")
                     .setTextGravity(Gravity.CENTER)
                     .setTextColor(requireActivity().getResources().getColor(R.color.background_tv))
                     .setMessage("Username registrato correttamente")
-                    .addButton("OK", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
+                    .addButton("Ok", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
 
                         dialog.dismiss();
                     });
@@ -574,7 +563,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         firebaseAuth.signOut();
         startActivity(new Intent(getActivity(), ActivityLogin.class));
         mGoogleSignInClient.signOut();
-        Log.d(TAG, "porca boia log out" + getContext());
         requireActivity().finish();
     }
 
@@ -723,7 +711,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void getUrl(){
-    Log.d(TAG, "fanculoooooo");
         mStoraeRef.child(firebaseAuth.getUid()).getDownloadUrl()
                 .addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
@@ -765,7 +752,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Log.d(TAG, "User account deleted.");
+                                        //Log.d(TAG, "User account deleted.");
                                         startActivity(new Intent(getActivity(), ActivityLogin.class));
                                         requireActivity().finish();
                                         //((MainActivity) requireActivity()).finish();
@@ -774,7 +761,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                             });
                 } else
                 {
-                    Log.e("qwe", String.valueOf(task.getException()));
+                    //Log.e("qwe", String.valueOf(task.getException()));
                 }
             }
         });
