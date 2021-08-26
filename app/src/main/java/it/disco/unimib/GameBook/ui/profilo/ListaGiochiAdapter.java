@@ -1,6 +1,5 @@
 package it.disco.unimib.GameBook.ui.profilo;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +15,9 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import it.disco.unimib.GameBook.R;
 import it.disco.unimib.GameBook.models.VideoGame;
-import it.disco.unimib.GameBook.ui.community.CommunityAdapter;
-import it.disco.unimib.GameBook.ui.community.User;
-import it.disco.unimib.GameBook.ui.esplora.NuoviArriviAdapter;
 
 
-public class PreferitiAdapter extends FirestoreRecyclerAdapter<VideoGame, PreferitiAdapter.PreferitiHolder> {
+public class ListaGiochiAdapter extends FirestoreRecyclerAdapter<VideoGame, ListaGiochiAdapter.ListaGiochiHolder> {
 
     private OnItemClickListener onItemClickListener;
 
@@ -30,33 +26,33 @@ public class PreferitiAdapter extends FirestoreRecyclerAdapter<VideoGame, Prefer
         void onItemClick(VideoGame videoGame);
     }
 
-    public PreferitiAdapter(FirestoreRecyclerOptions<VideoGame> options, OnItemClickListener onItemClickListener) {
+    public ListaGiochiAdapter(FirestoreRecyclerOptions<VideoGame> options, OnItemClickListener onItemClickListener) {
         super(options);
         this.onItemClickListener = onItemClickListener;
     }
 
     @Override
-    protected void onBindViewHolder(PreferitiAdapter.PreferitiHolder holder, int position, VideoGame model) {
+    protected void onBindViewHolder(ListaGiochiAdapter.ListaGiochiHolder holder, int position, VideoGame model) {
         holder.bind(model);
     }
 
     @NonNull
     @Override
-    public PreferitiAdapter.PreferitiHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ListaGiochiAdapter.ListaGiochiHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_videogame_preferiti, parent, false);
+                .inflate(R.layout.list_videogame, parent, false);
 
-        return new PreferitiHolder(view) ;
+        return new ListaGiochiHolder(view) ;
     }
 
-    public class PreferitiHolder extends RecyclerView.ViewHolder{
+    public class ListaGiochiHolder extends RecyclerView.ViewHolder{
         TextView stringa;
         ImageView imageview;
 
-        public PreferitiHolder(@NonNull View itemView) {
+        public ListaGiochiHolder(@NonNull View itemView) {
             super(itemView);
-            stringa = itemView.findViewById(R.id.titolo_preferiti);
-            imageview = itemView.findViewById(R.id.imageViewPreferiti);
+            stringa = itemView.findViewById(R.id.titolo_videogame);
+            imageview = itemView.findViewById(R.id.imageView_videogame);
 
         }
 

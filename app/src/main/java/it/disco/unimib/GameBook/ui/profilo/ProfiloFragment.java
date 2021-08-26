@@ -131,6 +131,11 @@ public class ProfiloFragment extends Fragment {
         if (firebaseUser.isAnonymous()){
             imageView.setImageDrawable(getResources().getDrawable(R.drawable.incognito));
             textView.setText("Ospite");
+            button1_veditutti.setVisibility(View.GONE);
+            button2_veditutti.setVisibility(View.GONE);
+            view.findViewById(R.id.testo_lista_giochi).setVisibility(View.GONE);
+            view.findViewById(R.id.testo_lista_preferiti).setVisibility(View.GONE);
+            view.findViewById(R.id.testo_ospite_giochi).setVisibility(View.VISIBLE);
         }
 
         //}

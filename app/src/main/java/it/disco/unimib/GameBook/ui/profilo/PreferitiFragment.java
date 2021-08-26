@@ -32,7 +32,7 @@ public class PreferitiFragment extends Fragment {
     private FirebaseFirestore db;
     RecyclerView recyclerView;
     FirebaseFirestore firebaseFirestore;
-    PreferitiAdapter preferitiAdapter;
+    ListaGiochiAdapter listaGiochiAdapter;
 
     User user;
 
@@ -84,15 +84,15 @@ public class PreferitiFragment extends Fragment {
                     .setQuery(query, VideoGame.class)
                     .build();
 
-            preferitiAdapter = new PreferitiAdapter(options, new PreferitiAdapter.OnItemClickListener() {
+            listaGiochiAdapter = new ListaGiochiAdapter(options, new ListaGiochiAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(VideoGame videoGame) {
                     PreferitiFragmentDirections.ActionPreferitiFragmentToVideoGameFragment action = PreferitiFragmentDirections.actionPreferitiFragmentToVideoGameFragment(videoGame);
                     Navigation.findNavController(view).navigate(action);
                 }
             });
-            preferitiAdapter.startListening();
-            recyclerView.setAdapter(preferitiAdapter);
+            listaGiochiAdapter.startListening();
+            recyclerView.setAdapter(listaGiochiAdapter);
         }else{
 
         }

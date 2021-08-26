@@ -31,7 +31,7 @@ public class RaccoltaFragment extends Fragment {
     private FirebaseFirestore db;
     RecyclerView recyclerView;
     FirebaseFirestore firebaseFirestore;
-    PreferitiAdapter adapter;
+    ListaGiochiAdapter adapter;
 
     User user;
 
@@ -75,7 +75,7 @@ public class RaccoltaFragment extends Fragment {
                     .setQuery(query, VideoGame.class)
                     .build();
 
-            adapter = new PreferitiAdapter(options, new PreferitiAdapter.OnItemClickListener() {
+            adapter = new ListaGiochiAdapter(options, new ListaGiochiAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(VideoGame videoGame) {
                     RaccoltaFragmentDirections.ActionRaccoltaFragmentToVideoGameFragment action = RaccoltaFragmentDirections.actionRaccoltaFragmentToVideoGameFragment(videoGame);
