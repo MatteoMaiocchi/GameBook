@@ -35,11 +35,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main_login);
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean prova = prefs.getBoolean(Constants.PROVA, false);
         prefs.edit().putBoolean(Constants.PROVA, false).apply();
-        Log.d("qwe", prova + "");
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
@@ -49,72 +47,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.bottomNav, navController);
 
-
-
-        /*
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Log.e("qwe", "cazzo");
-            }
-        }, 5000);
-
-         */
-
-
     }
 
-    @SuppressLint("StaticFieldLeak")
-    private void Download()
-    {
-
-        new AsyncTask<String, String, Boolean>()
-        {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
-
-            @Override
-            protected Boolean doInBackground(String... strings) {
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Boolean aBoolean) {
-                super.onPostExecute(aBoolean);
-            }
-        }.execute();
-    }
-    private static class DownloadFile extends AsyncTask<String, String, Boolean>{
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Boolean doInBackground(String... strings) {
-            for (int i = 0; i<500000; i++)
-            {
-                Log.d("qwe", i + "");
-                return false;
-            }
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean s) {
-            super.onPostExecute(s);
-
-        }
-
-        @Override
-        protected void onCancelled() {
-            super.onCancelled();
-        }
-    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

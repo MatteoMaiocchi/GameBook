@@ -23,7 +23,7 @@ public class ServiceLocator {
         return instance;
     }
 
-    public VideoGameService getNewsServiceWithRetrofit() {
+    public VideoGameService getGamesServiceWithRetrofit() {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.VIDEOGAME_API_BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         return retrofit.create(VideoGameService.class);
     }

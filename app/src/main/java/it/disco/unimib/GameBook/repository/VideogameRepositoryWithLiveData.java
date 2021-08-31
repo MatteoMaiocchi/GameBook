@@ -27,7 +27,7 @@ public class VideogameRepositoryWithLiveData implements IVideogameRepositoryWith
 
     public VideogameRepositoryWithLiveData(Application application) {
         this.application = application;
-        this.videoGameService = ServiceLocator.getInstance().getNewsServiceWithRetrofit();
+        this.videoGameService = ServiceLocator.getInstance().getGamesServiceWithRetrofit();
         this.mResponseLiveData = new MutableLiveData<>();
 
     }
@@ -42,17 +42,13 @@ public class VideogameRepositoryWithLiveData implements IVideogameRepositoryWith
                 @Override
                 public void onResponse(@NonNull Call<Response> call, @NonNull retrofit2.Response<Response> response) {
                     if (response.body() != null && response.isSuccessful()) {
-                        Log.d("non sono ", "null");
-                        //List<VideoGame> videoGameList = response.body().getVideoGameList();
                         mResponseLiveData.postValue(response.body());
                     }
-                    Log.d("code: ", ""+response.code());
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<Response> call, @NonNull Throwable t) {
                     mResponseLiveData.postValue(new Response(-1, null, null)); //in caso di errore, count a -1
-                    Log.d("code: ", t.getMessage());
                 }
             });
             return mResponseLiveData;
@@ -62,17 +58,13 @@ public class VideogameRepositoryWithLiveData implements IVideogameRepositoryWith
                 @Override
                 public void onResponse(@NonNull Call<Response> call, @NonNull retrofit2.Response<Response> response) {
                     if (response.body() != null && response.isSuccessful()) {
-                        Log.d("non sono ", "null");
-                        //List<VideoGame> videoGameList = response.body().getVideoGameList();
                         mResponseLiveData.postValue(response.body());
                     }
-                    Log.d("code: ", ""+response.code());
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<Response> call, @NonNull Throwable t) {
                     mResponseLiveData.postValue(new Response(-1, null, null)); //in caso di errore, count a -1
-                    Log.d("code: ", t.getMessage());
                 }
             });
             return mResponseLiveData;

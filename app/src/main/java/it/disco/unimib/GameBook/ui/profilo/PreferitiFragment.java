@@ -93,9 +93,6 @@ public class PreferitiFragment extends Fragment {
             });
             listaGiochiAdapter.startListening();
             recyclerView.setAdapter(listaGiochiAdapter);
-        }else{
-
         }
-
     }
 }

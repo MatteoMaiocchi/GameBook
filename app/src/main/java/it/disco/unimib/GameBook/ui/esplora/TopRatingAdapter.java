@@ -29,7 +29,6 @@ public class TopRatingAdapter extends RecyclerView.Adapter<TopRatingAdapter.TopR
     }
 
     public TopRatingAdapter(List<VideoGame> videoGameArrayList, OnItemClickListener onItemClickListener) {
-        Log.d("supremo", "momo");
         this.videoGameArrayList = videoGameArrayList;
         this.onItemClickListener = onItemClickListener;
     }
@@ -37,7 +36,6 @@ public class TopRatingAdapter extends RecyclerView.Adapter<TopRatingAdapter.TopR
     @NonNull
     @Override
     public TopRatingHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("debug", "onCreate");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_nuovi_arrivi, parent, false);
 
         return new TopRatingHolder(view);
@@ -45,7 +43,6 @@ public class TopRatingAdapter extends RecyclerView.Adapter<TopRatingAdapter.TopR
 
     @Override
     public void onBindViewHolder(@NonNull TopRatingHolder holder, int position) {
-        Log.d("sono in", "onbind");
         holder.bind(videoGameArrayList.get(position));
     }
 
@@ -74,7 +71,6 @@ public class TopRatingAdapter extends RecyclerView.Adapter<TopRatingAdapter.TopR
         }
 
         public void bind(VideoGame videoGame) {
-            Log.d("pippo", "e paperino");
             if (videoGame != null) {
 
                 String url = videoGame.getBackground_image();
@@ -89,24 +85,13 @@ public class TopRatingAdapter extends RecyclerView.Adapter<TopRatingAdapter.TopR
                             placeholder(R.drawable.ic_baseline_cloud_download_24).into(imageView);
                 }
                 textView.setText(videoGame.getName());
-                Log.d("nome", "videogame" + videoGame.getName());
-                Log.d("image", "url: " + newUrl);
 
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override public void onClick(View v) {
                         onItemClickListener.onItemClick(videoGame);
                     }
                 });
-
-
-                /*itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override public void onClick(View v) {
-                        onItemClickListener.onItemClick(videoGame);
-                    }
-                });*/
             }
         }
     }
-
-
 }

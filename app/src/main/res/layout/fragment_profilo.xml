@@ -32,43 +32,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageViewProfilo"
                 android:layout_centerHorizontal="true"
-                android:text="Username"
+                android:text="@string/username"
                 android:textSize="20dp">
 
             </TextView>
 
         </RelativeLayout>
 
-
-
-        <!--LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="50dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-            <ImageButton
-                android:id="@+id/button_griglia"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_baseline_grid_on_24" />
-
-            <ImageButton
-                android:id="@+id/button_preferiti"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_baseline_favorite_border_24" />
-
-
-        </LinearLayout>-->
         <LinearLayout
             android:layout_marginTop="35dp"
             android:layout_width="match_parent"
@@ -84,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="0dp"
-                    android:text="Lista"
+                    android:text="@string/lista"
                     android:textSize="25dp">
 
                 </TextView>
@@ -100,7 +70,7 @@
                     android:layout_marginLeft="160dp"
                     android:layout_marginEnd="0dp"
                     android:layout_marginRight="31dp"
-                    android:text="vedi tutto"
+                    android:text="@string/vedi_tutto"
                      />
 
 
@@ -135,7 +105,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="2dp"
                     android:layout_marginTop="6dp"
-                    android:text="Lista Preferiti"
+                    android:text="@string/lista_preferiti"
                     android:textSize="25dp">
 
                 </TextView>
@@ -151,7 +121,7 @@
                     android:layout_marginLeft="160dp"
                     android:layout_marginEnd="0dp"
                     android:layout_marginRight="31dp"
-                    android:text="vedi tutto"
+                    android:text="@string/vedi_tutto"
                      />
 
 
@@ -176,7 +146,7 @@
                 android:layout_marginLeft="2dp"
                 android:layout_marginTop="6dp"
                 android:textAlignment="center"
-                android:text="Per poter salvare i giochi vai in impostazioni e effettua il login!"
+                android:text="@string/error_profilo"
                 android:textSize="25dp"
                 android:visibility="gone">
 
@@ -184,37 +154,6 @@
 
         </LinearLayout>
 
-
-
-
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="0dp"
-            android:paddingRight="0dp"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <com.google.android.material.button.MaterialButtonToggleGroup
-                android:id="@+id/toggleButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <Button
-                    android:id="@+id/button1"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:text="Button 1"
-                    style="?attr/materialButtonOutlinedStyle"
-                    />
-
-                <Button
-                    android:id="@+id/button2"
-                    style="?attr/materialButtonOutlinedStyle"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:text="Button 2" />
-            </com.google.android.material.button.MaterialButtonToggleGroup>
-        </LinearLayout>-->
 
     </LinearLayout>
 

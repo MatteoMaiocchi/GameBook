@@ -18,13 +18,6 @@
             app:useSimpleSummaryProvider="true">
 
         </ListPreference>
-        <!--SwitchPreferenceCompat
-            android:key="prova"
-            android:title="prova"
-            android:summary="android"
-            android:icon="@drawable/ic_baseline_nights_stay_24"
-            android:defaultValue="false">
-        </SwitchPreferenceCompat-->
         <Preference
             android:key="logout"
             android:title="Log Out"

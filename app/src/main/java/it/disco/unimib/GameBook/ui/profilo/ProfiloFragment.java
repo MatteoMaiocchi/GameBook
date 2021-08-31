@@ -122,8 +122,6 @@ public class ProfiloFragment extends Fragment {
         recyclerView2.setHasFixedSize(true);
         recyclerView2.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        //if(!firebaseUser.isAnonymous())
-        //{
 
         setUpRecyclerView1(view, user);
         setUpRecyclerView2(view, user);
@@ -138,23 +136,9 @@ public class ProfiloFragment extends Fragment {
             view.findViewById(R.id.testo_ospite_giochi).setVisibility(View.VISIBLE);
         }
 
-        //}
 
         preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
 
-
-
-        /*
-        button_preferiti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController navController = NavHostFragment.findNavController(profiloFragment);
-                navController.navigate(
-                        R.id.action_ProfiloFragment_to_preferitiFragment);
-            }
-        });
-
-         */
         BounceView.addAnimTo(button1_veditutti);
         button1_veditutti.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,7 +226,6 @@ public class ProfiloFragment extends Fragment {
                         DocumentSnapshot documentSnapshot = task.getResult();
                         if(documentSnapshot != null && documentSnapshot.exists()){
                             String username = documentSnapshot.getString("username");
-                            //String newValue = preferences.getString(Constants.USERNAME, username);
                             textView.setText(username);
                             String photo = documentSnapshot.getString("foto");
                             if (photo != null){
@@ -347,20 +330,6 @@ public class ProfiloFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        /*
-        if (id == R.id.log_out)
-        {
-
-            firebaseAuth.signOut();
-            NavController navController = NavHostFragment.findNavController(this);
-            navController.navigate(
-                    R.id.action_ProfiloFragment_to_activityLogin);
-
-            mGoogleSignInClient.signOut();
-            return true;
-        }
-
-         */
         if (id == R.id.modifica_profilo){
             NavController navController = NavHostFragment.findNavController(this);
             navController.navigate(

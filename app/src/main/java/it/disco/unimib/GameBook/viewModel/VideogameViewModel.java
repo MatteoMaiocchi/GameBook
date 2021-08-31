@@ -41,21 +41,14 @@ public class VideogameViewModel extends AndroidViewModel {
         super(application);
         this.mIVideogameRepositoryWithLiveData = iVideogameRepositoryWithLiveData;
         this.stringa = stringa;
-        Log.d("guarda1", stringa);
     }
 
 
     public LiveData<Response> getResponseLiveData() {
-        Log.d("guarda2: ", stringa);
-
         if (mResponseLiveData == null) {
-            Log.d("Response: ", "LiveData");
             loadVideogames();
         }
         return mResponseLiveData;
-
-
-        //return  mResponseLiveData = mIVideogameRepositoryWithLiveData.fetchVideogames(this.stringa);
     }
 
     private void loadVideogames() {

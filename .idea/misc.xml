@@ -4,28 +4,22 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.10885416666666667" />
-        <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/drawable-night/ic_baseline_account_circle_24.xml" value="0.2703125" />
-        <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/drawable-night/ic_baseline_delete_forever_24.xml" value="0.2703125" />
-        <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/drawable-night/ic_baseline_image_24.xml" value="0.2703125" />
-        <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/drawable-night/ic_baseline_login_24.xml" value="0.2703125" />
-        <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/drawable-night/ic_baseline_nights_stay_24.xml" value="0.2703125" />
-        <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/drawable-night/ic_baseline_photo_camera_24.xml" value="0.2703125" />
-        <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.2703125" />
-        <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.2703125" />
-        <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.2703125" />
-        <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.2703125" />
-        <entry key="..\:/Users/pazzi/StudioProjects/GameBook/app/src/main/res/drawable/ic_baseline_photo_camera_24.xml" value="0.2703125" />
         <entry key="app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.21614583333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main_login.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/fragment_community.xml" value="0.1503623188405797" />
         <entry key="app/src/main/res/layout/fragment_esplora.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_preferiti.xml" value="0.16983695652173914" />
         <entry key="app/src/main/res/layout/fragment_profilo.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_raccolta.xml" value="0.16983695652173914" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.1503623188405797" />
         <entry key="app/src/main/res/layout/fragment_video_game.xml" value="0.1802536231884058" />
-        <entry key="app/src/main/res/layout/list_nuovi_arrivi.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/list_community.xml" value="0.1503623188405797" />
+        <entry key="app/src/main/res/layout/list_nuovi_arrivi.xml" value="0.1" />
         <entry key="app/src/main/res/layout/list_videogame.xml" value="0.37604166666666666" />
-        <entry key="app/src/main/res/layout/list_videogame_preferiti.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/list_videogame_preferiti.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/positive.xml" value="0.1503623188405797" />
+        <entry key="app/src/main/res/xml/preferences.xml" value="0.1503623188405797" />
       </map>
     </option>
   </component>

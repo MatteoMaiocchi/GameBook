@@ -38,7 +38,6 @@ public class CommunityAdapter extends FirestoreRecyclerAdapter<User, CommunityAd
     //rappresenta la view che verrà popolata con un elemento
     @Override
     public CommunityHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("debug", "onCreate community");
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_community, parent, false);
 

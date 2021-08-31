@@ -75,15 +75,6 @@ public class VideoGameFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
 
-        /*((MainActivity)getActivity()).setTitle("Video Game");
-
-        getActivity().setTitle("bau");
-
-        Toolbar bar = Toolbar.class.cast(getActivity().findViewById(R.id.favorite));*/
-
-        /*Toolbar actionBar = getActivity().findViewById(R.id.favorite);
-        actionBar.setTitle("Buongiorno");*/
-
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
@@ -97,13 +88,7 @@ public class VideoGameFragment extends Fragment {
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Log.d("debug", "2");
         super.onViewCreated(view, savedInstanceState);
-
-        /*Toolbar tbar = view.findViewById(R.id.favorite);
-        ((MainActivity) getActivity()).getSupportActionBar().hide();
-
-        ((MainActivity) getActivity()).setSupportActionBar(tbar);*/
 
         videoGame = VideoGameFragmentArgs.fromBundle(getArguments()).getVideoGame();
         TextView textView = view.findViewById(R.id.titoloVideoGame);
@@ -156,7 +141,7 @@ public class VideoGameFragment extends Fragment {
                     }
                 }
             });
-            //button.setVisibility(view.INVISIBLE);
+
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -175,25 +160,6 @@ public class VideoGameFragment extends Fragment {
                             rimuovi.setVisibility(View.VISIBLE);
 
                             rimuovi.startAnimation(anim);
-                            /*
-                            anim.setAnimationListener(new Animation.AnimationListener() {
-                                @Override
-                                public void onAnimationStart(Animation animation) {
-
-                                }
-
-                                @Override
-                                public void onAnimationEnd(Animation animation) {
-
-                                }
-
-                                @Override
-                                public void onAnimationRepeat(Animation animation) {
-
-                                }
-                            });
-
-                             */
                         }
 
                         @Override
@@ -270,41 +236,7 @@ public class VideoGameFragment extends Fragment {
             }});
         readDB();
 
-
-
-
     }
-
-
-    /*
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.top_menu_videogame, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if(id == R.id.favorite)
-        {
-            if(db.collection("users").document(firebaseAuth.getCurrentUser().getUid()).collection("preferiti").document(videoGame.getName()).toString() == videoGame.getName()) {
-                db.collection("users").document(firebaseAuth.getCurrentUser().getUid()).collection("preferiti").document(videoGame.getName()).delete();
-                choose = false;
-            }else {
-
-                DocumentReference documentReference = db.collection("users").document(firebaseAuth.getCurrentUser().getUid()).collection("preferiti").document(videoGame.getName());
-
-                Map<String, Object> user = new HashMap<>();
-                user.put("name", videoGame.getName());
-                user.put("background_image", videoGame.getBackground_image());
-                documentReference.set(user);
-                choose = true;
-            }
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-     */
 
     @Override
     public void onResume() {
@@ -320,18 +252,12 @@ public class VideoGameFragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        Log.d("raccolta", "bottone gone");
                         if(!queryDocumentSnapshots.getDocuments().isEmpty()){
 
                             List<DocumentSnapshot> documentSnapshots = queryDocumentSnapshots.getDocuments();
-                            Log.d("raccolta",documentSnapshots.toString());
                             if(!firebaseUser.isAnonymous()){
                                 progressBar.setVisibility(View.GONE);
                                 rimuovi.setVisibility(View.VISIBLE);
-                            }
-
-                            for(DocumentSnapshot documentSnapshot: documentSnapshots){
-                                Log.d("raccolta", Objects.requireNonNull(documentSnapshot.getData()).toString());
                             }
                         }else{
                             if(!firebaseUser.isAnonymous()){
@@ -347,11 +273,8 @@ public class VideoGameFragment extends Fragment {
                     @Override
                     public void onFailure(@NonNull  Exception e) {
                         button.setVisibility(View.VISIBLE);
-                        Log.d("raccolta", "bottone visible");
                         progressBar.setVisibility(View.GONE);
                     }
                 });
-
-
     }
 }

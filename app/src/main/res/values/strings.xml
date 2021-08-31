@@ -8,6 +8,20 @@
     <string name="profilo">Profilo</string>
     <string name="preferiti">Preferiti</string>
     <string name="community">Community</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nome">Nome</string>
+    <string name="email">Email</string>
+    <string name="data_di_uscita">Data di uscita</string>
+    <string name="aggiungi_alla_lista">Aggiungi alla lista</string>
+    <string name="rimuovi_dalla_lista">Rimuovi dalla lista</string>
+    <string name="data_di_uscita_2">Data di uscita:</string>
+    <string name="username">Username</string>
+    <string name="lista">Lista</string>
+    <string name="vedi_tutto">Vedi tutto</string>
+    <string name="lista_preferiti">Lista Preferiti</string>
+    <string name="error_profilo">Per poter salvare i giochi vai in impostazioni e effettua il login!</string>
+    <string name="top_rating">Top Rating</string>
+    <string name="scatta_una_foto">Scatta una foto</string>
+    <string name="scegli_una_foto">Scegli una foto</string>
+    <string name="accedi_come_ospite">Accedi come ospite</string>
 </resources>

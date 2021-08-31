@@ -48,9 +48,6 @@ public class VideogameTopRatingViewModel extends AndroidViewModel {
             loadVideogames();
         }
         return mResponseLiveData;
-
-
-        //return  mResponseLiveData = mIVideogameRepositoryWithLiveData.fetchVideogames(this.stringa);
     }
 
     private void loadVideogames() {

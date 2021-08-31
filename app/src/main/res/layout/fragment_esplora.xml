@@ -11,12 +11,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!--<SearchView
-            android:layout_width="390dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="30dp" />-->
-
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
@@ -46,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="0dp"
-                    android:text="Giochi"
+                    android:text="@string/giochi"
                     android:textSize="25sp">
 
                 </TextView>
@@ -79,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="0dp"
-                    android:text="Top Rating"
+                    android:text="@string/top_rating"
                     android:textSize="25sp">
 
                 </TextView>
