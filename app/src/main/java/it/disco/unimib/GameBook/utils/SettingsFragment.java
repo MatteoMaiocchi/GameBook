@@ -118,6 +118,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         assert photo != null;
         if (!firebaseUser.isAnonymous()){
             photo.setEnabled(true);
+
         }
         photo.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -208,6 +209,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         });
 
         Preference delete = findPreference(Constants.DELETE);
+        if(firebaseUser.isAnonymous()){
+            delete.setEnabled(false);
+        }
         assert delete != null;
         delete.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override

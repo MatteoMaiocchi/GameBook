@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -171,8 +172,9 @@ public class VideoGameFragment extends Fragment {
                         public void onAnimationEnd(Animation animation) {
                             button.setVisibility(View.GONE);
                             anim = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_up);
-                            rimuovi.startAnimation(anim);
                             rimuovi.setVisibility(View.VISIBLE);
+
+                            rimuovi.startAnimation(anim);
                             /*
                             anim.setAnimationListener(new Animation.AnimationListener() {
                                 @Override
@@ -207,7 +209,7 @@ public class VideoGameFragment extends Fragment {
                     user.put("rating",videoGame.getRating());
                     user.put("released",videoGame.getReleased());
                     documentReference.set(user);
-                    button.setVisibility(View.GONE);
+
 
                 }
             });
@@ -216,6 +218,7 @@ public class VideoGameFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     anim = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_bottom);
+                    rimuovi.setVisibility(View.VISIBLE);
                     rimuovi.startAnimation(anim);
                     anim.setAnimationListener(new Animation.AnimationListener() {
                         @Override
